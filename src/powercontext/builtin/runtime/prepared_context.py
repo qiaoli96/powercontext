@@ -288,11 +288,18 @@ class PreparedContextBuilder:
                     entry_id=hit.entry_id,
                     entry_version_id=hit.entry_version_id,
                 )
-                for start, end in _evidence_spans(hit.text):
-                    text = hit.text[start:end]
-                    score = _evidence_score(query_terms, text)
-                    if score > 0:
-                        proposed.append((score, group_index, start, address, text))
+                spans = _evidence_spans(hit.text)
+                # Evidence labels often span adjacent abstract sentences. Consider short
+                # contiguous windows as well as single sentences so the budget can retain
+                # complete evidence instead of scattering isolated keyword matches.
+                for first in range(len(spans)):
+                    for width in range(1, min(4, len(spans) - first + 1)):
+                        start = spans[first][0]
+                        end = spans[first + width - 1][1]
+                        text = hit.text[start:end]
+                        score = _evidence_score(query_terms, text)
+                        if score > 0:
+                            proposed.append((score, group_index, start, address, text))
         proposed.sort(key=lambda item: (-item[0] / max(1, len(item[4])), -item[0], item[1], item[2]))
 
         fragments: list[PreparedEvidenceFragment] = []
@@ -309,6 +316,13 @@ class PreparedContextBuilder:
                 end,
             )
             if identity in selected:
+                continue
+            if any(
+                fragment.address == address
+                and fragment.start <= start
+                and end <= fragment.end
+                for fragment in fragments
+            ):
                 continue
             fragment = PreparedEvidenceFragment(address=address, start=start, end=end, text=text)
             trial = (*fragments, fragment)
