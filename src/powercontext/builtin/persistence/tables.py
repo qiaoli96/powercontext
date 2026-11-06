@@ -186,6 +186,13 @@ SOURCE_JOURNAL_HEADS_TABLE = Table(
     CheckConstraint("position >= 0", name="ck_pc_source_journal_heads_position_nonnegative"),
 )
 
+SOURCE_LIFECYCLE_GRAPHS_TABLE = Table(
+    "pc_source_lifecycle_graphs",
+    SHARED_METADATA,
+    Column("scope_id", identity_string(MAX_SCOPE_ID_LENGTH), primary_key=True),
+    Column("payload", _canonical_payload_type(), nullable=False),
+)
+
 ARTIFACTS_TABLE = Table(
     "pc_artifacts",
     SHARED_METADATA,
@@ -1187,5 +1194,5 @@ BUILTIN_TABLES = (
     + MEMORY_TABLES
     + STATISTICS_TABLES
     + RECURRENCE_TABLES
-    + (ARTIFACT_TAGS_TABLE, DREAM_RUNS_TABLE, RECEIPT_MIGRATION_REVIEW_TABLE)
+    + (ARTIFACT_TAGS_TABLE, DREAM_RUNS_TABLE, RECEIPT_MIGRATION_REVIEW_TABLE, SOURCE_LIFECYCLE_GRAPHS_TABLE)
 )

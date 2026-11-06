@@ -2702,6 +2702,15 @@ class ScopedTopicMemoryApplication:
                         "unit": "topic-memory",
                     },
                 )
+        if self._runtime.lifecycle is not None:
+            unavailable = await self._runtime.lifecycle.for_scope(self.scope_id).unavailable_topic_refs()
+            if unavailable:
+                result = result.model_copy(update={
+                    "hits": tuple(
+                        hit for hit in result.hits
+                        if (hit.artifact_ref.artifact_id, hit.artifact_ref.revision) not in unavailable
+                    )
+                })
         return result
 
     async def _search_with_embedding(
@@ -3046,6 +3055,7 @@ class BuiltinRuntime:
         remote_ingestion: RemoteIngestion | None = None,
         dream_service: DreamService | None = None,
         generation_concurrency: int = 4,
+        lifecycle_database=None,
     ) -> None:
         if source_window_limit < 1:
             raise _RuntimeConfigurationError("source_window_limit")
@@ -3135,6 +3145,9 @@ class BuiltinRuntime:
         self.skill = SkillApplication(self)
         self.remote_skills = RemoteSkillApplication(self)
         self.statistics = StatisticsApplication(self)
+        from powercontext.builtin.runtime.source_lifecycle import SourceLifecycleApplication
+
+        self.lifecycle = None if lifecycle_database is None else SourceLifecycleApplication(self, lifecycle_database)
         self.handoff_report: HandoffReportApplication | None = None
         self.artifact_processing_supervisor: ArtifactProcessingSupervisors | None = None
         self.processor = None if scope_ids is None else ScheduledSourceProcessor(self, scope_ids)
