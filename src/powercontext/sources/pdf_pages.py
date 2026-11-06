@@ -312,6 +312,13 @@ def _rank_candidates(
             or {"operating", "profit"}.issubset(matched)
         ):
             lexical_score += 4.0
+        # A margin question needs both the numerator and the revenue denominator.
+        # Statement pages contain the exact figures but may not repeat the word
+        # "margin", so give the P&L page a modest tie-break when it has both lines.
+        if "margin" in question.casefold() and "revenue" in matched and (
+            "income" in matched or "profit" in matched
+        ):
+            lexical_score += 3.0
         # Reciprocal rank preserves the backend's own relevance signal when lexical
         # overlap is tied, while the first component rewards rare, query-specific terms.
         return (
