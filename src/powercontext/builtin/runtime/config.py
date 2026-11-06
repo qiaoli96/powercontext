@@ -137,6 +137,8 @@ class RuntimeConfig(BaseModel):
 
     scope_cache_size: int = Field(default=DEFAULT_SCOPE_CACHE_SIZE, ge=1)
     source_window_limit: int = Field(default=100, ge=1)
+    memory_source_count_threshold: int | None = None
+    topic_memory_source_count_threshold: int | None = None
     context_assembly_max_entries: int = Field(default=8, ge=1)
     memory_extraction_profile: MemoryExtractionProfile = MemoryExtractionProfile.CODING
     memory_rerank_enabled: bool = False
@@ -160,6 +162,13 @@ class RuntimeConfig(BaseModel):
         if self.memory_max_active_entries > self.memory_max_manifest_entries:
             raise ValueError("memory_max_active_entries cannot exceed memory_max_manifest_entries")  # noqa: TRY003
         return self
+
+    @field_validator("memory_source_count_threshold", "topic_memory_source_count_threshold", mode="before")
+    @classmethod
+    def validate_source_count_threshold(cls, value: Any) -> Any:
+        if value is not None and (type(value) is not int or value <= 0):
+            raise ValueError("source count threshold must be a positive integer")  # noqa: TRY003
+        return value
 
     recall_gate_enabled: bool = False
     recall_gate_max_rounds: int = Field(default=2, ge=0, le=2)

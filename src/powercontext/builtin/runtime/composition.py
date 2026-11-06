@@ -27,6 +27,7 @@ from pathlib import Path
 from typing import TYPE_CHECKING, Any, Literal, TypeVar, cast
 
 from pydantic import AnyHttpUrl, JsonValue, SecretStr
+from sqlalchemy import func, select
 from typing_extensions import override
 
 from powercontext._logging import log_safely
@@ -106,7 +107,7 @@ from powercontext.builtin.persistence.sqlite.topic_memory_index import (
     SQLiteTopicMemoryFTSIndex,
     SQLiteTopicMemoryVectorIndex,
 )
-from powercontext.builtin.persistence.tables import BUILTIN_TABLES
+from powercontext.builtin.persistence.tables import BUILTIN_TABLES, SOURCES_TABLE
 from powercontext.builtin.persistence.tag_schema import ensure_topic_memory_tag_schema
 from powercontext.builtin.persistence.topic_memory import TopicMemoryRepository
 from powercontext.builtin.persistence.topic_memory_index import (
@@ -141,6 +142,8 @@ from powercontext.builtin.runtime.family_processing import FAMILY_BINDINGS, Fami
 from powercontext.builtin.runtime.memory_write_gate import build_memory_write_gate
 from powercontext.builtin.runtime.models import MemorySearchMode, RuntimeCapabilities
 from powercontext.builtin.runtime.processing_discovery import SourceProcessingPendingProvider, enabled_profile_scopes
+from powercontext.builtin.persistence.cursors import SourceCursorRepository
+from powercontext.builtin.triggers import SOURCE_WINDOW_TRIGGER_NAME
 from powercontext.builtin.runtime.processing_registry import (
     canonical_processing_manifest,
     dream_operations,
@@ -770,7 +773,43 @@ def _artifact_processing_bindings(  # noqa: C901 - validate and assemble one reg
         else:
             entrypoint = partial(run_family_worker, FamilyWorkerSpec(config=config, worker_security=worker_security))
         interval = None if family == "profile" else automatic[family]
+        threshold = (
+            config.runtime.memory_source_count_threshold
+            if family == "memory"
+            else config.runtime.topic_memory_source_count_threshold
+            if family == "topic-memory"
+            else None
+        )
+        if interval is None and threshold is not None:
+            # The supervisor's durable dirty scan is also the restart mechanism.
+            # A short scan interval lets count admission react to new journal rows.
+            interval = 0.25
         binding = canonical[family]
+        automatic_filter = enabled_profile_scopes if family == "profile" else None
+        if threshold is not None and family in {"memory", "topic-memory"}:
+            family_binding = binding
+            time_schedule_enabled = automatic[family] is not None
+
+            async def count_threshold_filter(connection, scope_ids, *, _binding=family_binding,
+                                             _threshold=threshold, _time_enabled=time_schedule_enabled):
+                if _time_enabled:
+                    return frozenset(scope_ids)
+                cursors = SourceCursorRepository()
+                eligible_scopes = set()
+                for scope_id in scope_ids:
+                    stored = await cursors.load(connection, scope_id, _binding)
+                    after = 0 if stored is None else stored.cursor.sequence
+                    count = await connection.scalar(
+                        select(func.count()).select_from(SOURCES_TABLE).where(
+                            SOURCES_TABLE.c.scope_id == scope_id,
+                            SOURCES_TABLE.c.journal_position > after,
+                        )
+                    )
+                    if int(count or 0) >= _threshold:
+                        eligible_scopes.add(scope_id)
+                return frozenset(eligible_scopes)
+
+            automatic_filter = count_threshold_filter
         configured.append(
             ArtifactProcessingBinding(
                 binding_name=binding,
@@ -786,7 +825,7 @@ def _artifact_processing_bindings(  # noqa: C901 - validate and assemble one reg
                 pending_provider=None
                 if family == "skill"
                 else SourceProcessingPendingProvider(contexts.database, binding, family),
-                automatic_scope_filter=enabled_profile_scopes if family == "profile" else None,
+                automatic_scope_filter=automatic_filter,
             )
         )
     _validate_processing_registrations(configured)
