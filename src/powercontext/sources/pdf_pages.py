@@ -82,7 +82,9 @@ async def search_pdf_pages(memory: Any, question: str, limit: int = 10) -> tuple
     if not isinstance(question,str) or not question.strip(): raise ValueError("question must not be blank")
     if limit < 0: raise ValueError("limit must not be negative")
     if limit == 0: return ()
-    result=await memory.search(SearchMemoryRequest(query=question,limit=min(max(limit*4,limit),100),mode="auto"))
+    # Search the largest supported candidate pool before reducing to distinct PDF
+    # pages. Evidence pages can rank below unrelated pages in the initial fusion.
+    result=await memory.search(SearchMemoryRequest(query=question,limit=100,mode="auto"))
     citations=[]; seen=set()
     for hit in result.hits:
         citation=MemoryCitation(memory_ref=hit.memory_ref,entry_id=hit.entry_id,entry_version_id=hit.entry_version_id)
