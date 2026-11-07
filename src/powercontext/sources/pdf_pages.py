@@ -43,6 +43,8 @@ def parse_pdf_document(value: PDFDocumentInput) -> tuple[PDFPageInput, ...]:
 
     if not value.document_id or not value.document_id.strip():
         raise ValueError("document_id must not be blank")
+    if not value.content.startswith(b"%PDF-") or not value.content.rstrip(b"\x00\t\n\x0c\r ").endswith(b"%%EOF"):
+        raise ValueError("invalid PDF header or missing end-of-file marker")
     try:
         # Finance PDFs can be readable despite minor specification defects; pypdf's
         # tolerant mode repairs those while a failure on any page still aborts atomically.
@@ -63,8 +65,6 @@ def parse_pdf_document(value: PDFDocumentInput) -> tuple[PDFPageInput, ...]:
             raise ValueError("PDF has no pages")
         return pages
     except Exception as exc:
-        if isinstance(exc, ValueError) and str(exc).startswith("document_id"):
-            raise
         raise ValueError("invalid or unreadable PDF document") from exc
 
 
@@ -79,7 +79,8 @@ class PDFPageSource(Source):
 def _source_id(doc: str, digest: str, page: int) -> str:
     ident = f"pdf:{quote(doc, safe='')}:{digest}:{page}"
     if len(ident) > MAX_SOURCE_ID_LENGTH:
-        raise ValueError("PDF page source identity too long")
+        doc_key = hashlib.sha256(doc.encode("utf-8")).hexdigest()
+        return f"pdf-sha256:{doc_key}:{digest}:{page}"
     return ident
 
 
@@ -161,6 +162,24 @@ _QUERY_SYNONYMS = {
     "margin": ("rate", "percentage"),
 }
 
+_INCOME_HEADINGS = ("statement of income", "statements of income", "statement of operations", "income statement")
+_BALANCE_HEADINGS = ("balance sheet", "balance sheets", "statement of financial position")
+_CASH_FLOW_HEADINGS = ("statement of cash flows", "statements of cash flows", "cash flow statement")
+
+
+def _report_concepts(question: str) -> tuple[tuple[str, ...], tuple[str, ...]]:
+    """Find statement headings and financial vocabulary implied by the question."""
+
+    normalized = analyze_text(question)
+    headings: tuple[str, ...] = ()
+    phrases: tuple[str, ...] = ()
+    if "capital intensive" in normalized or "capital intensity" in normalized:
+        headings = (*_INCOME_HEADINGS, *_BALANCE_HEADINGS, *_CASH_FLOW_HEADINGS)
+        phrases = ("property plant and equipment", "capital expenditures", "net sales", "total assets")
+    elif "segment" in normalized and ("growth" in normalized or "sales" in normalized):
+        phrases = ("business segments", "organic sales", "net sales", "segment sales")
+    return headings, phrases
+
 
 async def search_pdf_pages(memory: Any, question: str, limit: int = 10) -> tuple[MemoryCitation, ...]:
     """Search and deterministically rerank page candidates from a scoped Memory."""
@@ -213,6 +232,13 @@ def _query_variants(question: str) -> tuple[str, ...]:
     """Keep the original query and add bounded, generic finance-term expansions."""
 
     variants = [question]
+    headings, phrases = _report_concepts(question)
+    # Use short queries so statement pages can enter the candidate pool even
+    # when they do not contain the question's analytical terminology.
+    if headings:
+        variants.extend(("statement income", "balance sheet", "cash flows"))
+    elif phrases:
+        variants.extend(phrases)
     terms = tuple(dict.fromkeys(analyze_fts_query(question).split()))
     if not terms:
         return tuple(variants)
@@ -223,7 +249,7 @@ def _query_variants(question: str) -> tuple[str, ...]:
             chunk = " ".join(_expanded_query_terms(chunk_terms))
             if chunk and chunk not in variants:
                 variants.append(chunk)
-            if len(variants) >= 3:
+            if len(variants) >= 3 + (3 if headings else len(phrases)):
                 break
 
     concepts = sorted(
@@ -287,10 +313,9 @@ def _rank_candidates(
             for token in analyze_text(alias).split():
                 term_weights[token] = max(term_weights.get(token, 0.0), 0.65)
 
-    token_sets = {
-        identity: frozenset(analyze_text(hit.text).split())
-        for identity, hit in candidates.items()
-    }
+    headings, phrases = _report_concepts(question)
+    normalized_pages = {identity: analyze_text(hit.text) for identity, hit in candidates.items()}
+    token_sets = {identity: frozenset(page.split()) for identity, page in normalized_pages.items()}
     document_frequency = Counter(
         term for token_set in token_sets.values() for term in token_set if term in term_weights
     )
@@ -304,6 +329,15 @@ def _rank_candidates(
     def score(identity: tuple[str, int, str, str]) -> tuple[float, float, str, str]:
         matched = token_sets[identity]
         lexical_score = sum(weights[term] * term_weights[term] for term in term_weights if term in matched)
+        if headings or phrases:
+            page = f" {normalized_pages[identity]} "
+            lexical_score += 2.0 * sum(f" {phrase} " in page for phrase in phrases)
+            if headings:
+                # Actual statement titles occur near the top. References in
+                # notes and long prose should not get the same boost.
+                top = f" {' '.join(page.split()[:45])} "
+                if any(f" {heading} " in top for heading in headings):
+                    lexical_score += 12.0
         # EBITDA questions commonly need two separate statement pages: the
         # operating-income line and D&A from the cash-flow statement. Reward the
         # income-statement line so the cash-flow page cannot crowd it out.
