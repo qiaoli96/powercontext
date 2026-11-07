@@ -314,6 +314,7 @@ def _rank_candidates(
                 term_weights[token] = max(term_weights.get(token, 0.0), 0.65)
 
     headings, phrases = _report_concepts(question)
+    normalized_question = f" {analyze_text(question)} "
     normalized_pages = {identity: analyze_text(hit.text) for identity, hit in candidates.items()}
     token_sets = {identity: frozenset(page.split()) for identity, page in normalized_pages.items()}
     document_frequency = Counter(
@@ -326,8 +327,12 @@ def _rank_candidates(
         for term in term_weights
     }
 
-    def score(identity: tuple[str, int, str, str]) -> tuple[float, float, str, str]:
+    def score(identity: tuple[str, int, str, str]) -> tuple[bool, float, float, str, str]:
         matched = token_sets[identity]
+        document_id = candidates[identity].text.partition("\n")[0]
+        filing = re.fullmatch(r"(.+)_\d{4}_[A-Za-z0-9]+(?:_[A-Za-z0-9]+)*", document_id)
+        company = analyze_text(filing[1]) if filing else ""
+        company_matches = bool(company and f" {company} " in normalized_question)
         lexical_score = sum(weights[term] * term_weights[term] for term in term_weights if term in matched)
         if headings or phrases:
             page = f" {normalized_pages[identity]} "
@@ -356,6 +361,7 @@ def _rank_candidates(
         # Reciprocal rank preserves the backend's own relevance signal when lexical
         # overlap is tied, while the first component rewards rare, query-specific terms.
         return (
+            not company_matches,
             -lexical_score,
             -reciprocal_ranks[identity],
             identity[2],
