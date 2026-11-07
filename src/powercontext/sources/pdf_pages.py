@@ -162,9 +162,13 @@ _QUERY_SYNONYMS = {
     "margin": ("rate", "percentage"),
 }
 
-_INCOME_HEADINGS = ("statement of income", "statements of income", "statement of operations", "income statement")
+_INCOME_HEADINGS = (
+    "statement of income", "statements of income", "statement of operations", "statements of operations",
+    "income statement", "statements of earnings",
+)
 _BALANCE_HEADINGS = ("balance sheet", "balance sheets", "statement of financial position")
 _CASH_FLOW_HEADINGS = ("statement of cash flows", "statements of cash flows", "cash flow statement")
+_SEGMENT_HEADINGS = ("business segment data", "results by segment", "sales by segment", "reportable segments")
 
 
 def _report_concepts(question: str) -> tuple[tuple[str, ...], tuple[str, ...]]:
@@ -176,8 +180,24 @@ def _report_concepts(question: str) -> tuple[tuple[str, ...], tuple[str, ...]]:
     if "capital intensive" in normalized or "capital intensity" in normalized:
         headings = (*_INCOME_HEADINGS, *_BALANCE_HEADINGS, *_CASH_FLOW_HEADINGS)
         phrases = ("property plant and equipment", "capital expenditures", "net sales", "total assets")
-    elif "segment" in normalized and ("growth" in normalized or "sales" in normalized):
+    elif any(term in normalized for term in ("quick ratio", "current ratio", "working capital")):
+        headings = _BALANCE_HEADINGS
+        phrases = ("current assets", "current liabilities", "accounts receivable", "cash equivalents")
+    elif "gross margin" in normalized:
+        headings = _INCOME_HEADINGS
+        phrases = ("cost of sales", "gross profit", "total revenues", "cost of revenues")
+    elif "effective tax rate" in normalized:
+        headings = (*_INCOME_HEADINGS, "income taxes")
+        phrases = ("income before taxes", "before income taxes", "income tax expense", "effective tax rate")
+    elif ("segment" in normalized and ("growth" in normalized or "sales" in normalized)) or (
+        "categories" in normalized and "revenue" in normalized
+    ):
+        headings = _SEGMENT_HEADINGS
         phrases = ("business segments", "organic sales", "net sales", "segment sales")
+    elif any(term in normalized for term in ("customer concentration", "primary customers", "major customers")):
+        phrases = ("major customers", "largest customers", "customer concentration", "government contracts")
+    elif "cyclicality" in normalized or "cyclical" in normalized:
+        phrases = ("cyclical", "economic conditions", "business cycles", "customer demand")
     return headings, phrases
 
 
@@ -235,10 +255,16 @@ def _query_variants(question: str) -> tuple[str, ...]:
     headings, phrases = _report_concepts(question)
     # Use short queries so statement pages can enter the candidate pool even
     # when they do not contain the question's analytical terminology.
-    if headings:
-        variants.extend(("statement income", "balance sheet", "cash flows"))
-    elif phrases:
-        variants.extend(phrases)
+    heading_queries = {
+        _INCOME_HEADINGS[0]: ("statement income", "statements operations"),
+        _BALANCE_HEADINGS[0]: ("balance sheet",),
+        _CASH_FLOW_HEADINGS[0]: ("cash flows",),
+        _SEGMENT_HEADINGS[0]: ("business segment",),
+        "income taxes": ("income taxes",),
+    }
+    variants.extend(query for heading, queries in heading_queries.items() if heading in headings for query in queries)
+    variants.extend(phrase for phrase in phrases if phrase not in variants)
+    chunk_limit = len(variants) + 2
     terms = tuple(dict.fromkeys(analyze_fts_query(question).split()))
     if not terms:
         return tuple(variants)
@@ -249,7 +275,7 @@ def _query_variants(question: str) -> tuple[str, ...]:
             chunk = " ".join(_expanded_query_terms(chunk_terms))
             if chunk and chunk not in variants:
                 variants.append(chunk)
-            if len(variants) >= 3 + (3 if headings else len(phrases)):
+            if len(variants) >= chunk_limit:
                 break
 
     concepts = sorted(
