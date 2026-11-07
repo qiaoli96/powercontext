@@ -1,0 +1,14 @@
+{
+  "command": [
+    "/mnt/f/oceanbase_competition/powerContext/codes/powercontext/competition/.venv/bin/python",
+    "-m",
+    "pytest",
+    "-q",
+    "/mnt/f/oceanbase_competition/powerContext/codes/powercontext/minimax/tests"
+  ],
+  "source": "generated/tickets.py",
+  "source_sha256": "66c1e3e0592041f05075bb36558a682df32c6b6c363678a3348a964dfeb33034",
+  "tests_sha256": "401924aea6a2c059d33f08517276177bba4cd6c2fc8c5212ffae4c007d72e976",
+  "exit_code": 0,
+  "output": "...                                                                      [100%]\n3 passed in 0.11s\n"
+}

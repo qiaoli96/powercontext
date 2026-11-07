@@ -1,0 +1,18 @@
+--- baseline/tickets.py
++++ generated/tickets.py
+@@ -1,3 +1,13 @@
+ def list_tickets(tickets, *, priority=None):
+-    """Return tickets ordered by ID."""
+-    return sorted(tickets, key=lambda ticket: ticket["id"])
++    """Return tickets ordered by ID, optionally filtered by priority.
++
++    When ``priority`` is provided, only tickets whose ``priority`` field
++    matches it are returned; if none match, an empty list is returned.
++    When ``priority`` is omitted (``None``), all tickets are returned.
++
++    The input list is never modified.
++    """
++    selected = tickets
++    if priority is not None:
++        selected = [ticket for ticket in tickets if ticket["priority"] == priority]
++    return sorted(selected, key=lambda ticket: ticket["id"])

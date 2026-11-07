@@ -1,0 +1,14 @@
+{
+  "command": [
+    "/mnt/f/oceanbase_competition/powerContext/codes/powercontext/competition/.venv/bin/python",
+    "-m",
+    "pytest",
+    "-q",
+    "/mnt/f/oceanbase_competition/powerContext/codes/powercontext/minimax/tests"
+  ],
+  "source": "baseline/tickets.py",
+  "source_sha256": "bdcb671b0288eb82dfa40b4c2f4cdc77ad4beef8e4c539d3ca196c0fe9de2131",
+  "tests_sha256": "401924aea6a2c059d33f08517276177bba4cd6c2fc8c5212ffae4c007d72e976",
+  "exit_code": 1,
+  "output": "FF.                                                                      [100%]\n=================================== FAILURES ===================================\n___________________________ test_filters_by_priority ___________________________\n\n    def test_filters_by_priority():\n>       assert [ticket[\"id\"] for ticket in list_tickets(TICKETS, priority=\"high\")] == [1, 3]\nE       assert [1, 2, 3] == [1, 3]\nE         \nE         At index 1 diff: 2 != 3\nE         Left contains one more item: 3\nE         Use -v to get more diff\n\nminimax/tests/test_tickets.py:12: AssertionError\n__________________________ test_no_matching_priority ___________________________\n\n    def test_no_matching_priority():\n>       assert list_tickets(TICKETS, priority=\"medium\") == []\nE       AssertionError: assert [{'id': 1, 'p...ity': 'high'}] == []\nE         \nE         Left contains 3 more items, first extra item: {'id': 1, 'priority': 'high'}\nE         Use -v to get more diff\n\nminimax/tests/test_tickets.py:16: AssertionError\n=========================== short test summary info ============================\nFAILED minimax/tests/test_tickets.py::test_filters_by_priority - assert [1, 2...\nFAILED minimax/tests/test_tickets.py::test_no_matching_priority - AssertionEr...\n2 failed, 1 passed in 1.24s\n"
+}
