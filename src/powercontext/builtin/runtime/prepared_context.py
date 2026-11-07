@@ -300,7 +300,10 @@ class PreparedContextBuilder:
                         score = _evidence_score(query_terms, text)
                         if score > 0:
                             proposed.append((score, group_index, start, address, text))
-        proposed.sort(key=lambda item: (-item[0] / max(1, len(item[4])), -item[0], item[1], item[2]))
+        # _evidence_score already discounts long, weakly relevant windows. Dividing by
+        # character length again made short fragments dominate and prevented complete
+        # multi-sentence evidence from surviving the byte budget.
+        proposed.sort(key=lambda item: (-item[0], len(item[4]), item[1], item[2]))
 
         fragments: list[PreparedEvidenceFragment] = []
         selected: set[tuple[str, str, int, str, str, int, int]] = set()
