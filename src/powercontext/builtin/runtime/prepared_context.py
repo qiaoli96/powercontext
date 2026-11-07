@@ -276,7 +276,7 @@ class PreparedContextBuilder:
         candidates: Sequence[PreparedMemoryCandidates],
     ) -> PreparedContextBuild:
         query_terms = _evidence_terms(request.query)
-        proposed: list[tuple[float, int, int, MemoryEntryAddress, str]] = []
+        proposed: list[tuple[float, int, int, MemoryEntryAddress, str, str]] = []
         for group_index, group in enumerate(candidates):
             if group.memory_ref is None:
                 continue
@@ -299,40 +299,33 @@ class PreparedContextBuilder:
                         text = hit.text[start:end]
                         score = _evidence_score(query_terms, text)
                         if score > 0:
-                            proposed.append((score, group_index, start, address, text))
+                            proposed.append((score, group_index, start, address, text, hit.text))
         # _evidence_score already discounts long, weakly relevant windows. Dividing by
         # character length again made short fragments dominate and prevented complete
         # multi-sentence evidence from surviving the byte budget.
         proposed.sort(key=lambda item: (-item[0], len(item[4]), item[1], item[2]))
 
         fragments: list[PreparedEvidenceFragment] = []
-        selected: set[tuple[str, str, int, str, str, int, int]] = set()
-        for _score, _group, start, address, text in proposed:
+        for _score, _group, start, address, text, source_text in proposed:
             end = start + len(text)
-            identity = (
-                address.memory.scope_id,
-                address.memory.artifact.artifact_id,
-                address.memory.artifact.revision,
-                address.entry_id,
-                address.entry_version_id,
-                start,
-                end,
+            overlapping = [
+                index
+                for index, fragment in enumerate(fragments)
+                if fragment.address == address and fragment.start < end and start < fragment.end
+            ]
+            trial = fragments.copy()
+            if overlapping:
+                start = min(start, *(fragments[index].start for index in overlapping))
+                end = max(end, *(fragments[index].end for index in overlapping))
+                for index in reversed(overlapping):
+                    del trial[index]
+            fragment = PreparedEvidenceFragment(
+                address=address, start=start, end=end, text=source_text[start:end]
             )
-            if identity in selected:
-                continue
-            if any(
-                fragment.address == address
-                and fragment.start <= start
-                and end <= fragment.end
-                for fragment in fragments
-            ):
-                continue
-            fragment = PreparedEvidenceFragment(address=address, start=start, end=end, text=text)
-            trial = (*fragments, fragment)
+            trial.insert(overlapping[0] if overlapping else len(trial), fragment)
             rendered = _render_evidence_fragments(trial)
             if len(rendered.encode("utf-8")) <= request.max_bytes:
-                fragments.append(fragment)
-                selected.add(identity)
+                fragments = trial
         if not fragments:
             return PreparedContextBuild(context=self.empty(), origins=(), fragments=())
         content = _render_evidence_fragments(tuple(fragments))
@@ -832,7 +825,7 @@ def _evidence_score(query_terms: tuple[str, ...], text: str) -> float:
 
 def _evidence_spans(text: str) -> tuple[tuple[int, int], ...]:
     spans = []
-    for match in re.finditer(r"[^.!?]+(?:[.!?]+|$)", text, re.DOTALL):
+    for match in re.finditer(r"(?:[^.!?]|(?<=\d)\.(?=\d))+(?:[.!?]+|$)", text):
         start, end = match.span()
         while start < end and text[start].isspace():
             start += 1
