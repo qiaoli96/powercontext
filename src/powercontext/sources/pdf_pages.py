@@ -132,8 +132,8 @@ PDF_PAGE_SOURCE_DEFINITION = AdapterSourceDefinition(_Adapter(), projections=(_P
 
 _QUERY_CHUNK_SIZE = 6
 _QUERY_CHUNK_STEP = 4
-_QUERY_COUNT_LIMIT = 8
-_SEARCH_POOL_LIMIT = 300
+_QUERY_COUNT_LIMIT = 16
+_SEARCH_POOL_LIMIT = 600
 _QUERY_SYNONYMS = {
     "geography": ("geographic", "region", "regions", "area", "market", "country", "countries", "territories"),
     "geographies": ("geographic", "region", "regions", "area", "market", "country", "countries", "territories"),
