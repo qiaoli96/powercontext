@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>科研资料检索助手</title>
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body { font-family: -apple-system, "Noto Sans SC", sans-serif; background: #f5f7fa; color: #333; }
+    .header { background: linear-gradient(135deg, #1a73e8, #4285f4); color: #fff; padding: 2rem; text-align: center; }
+    .header h1 { font-size: 1.6rem; margin-bottom: 0.5rem; }
+    .header p { font-size: 0.9rem; opacity: 0.85; }
+    .search-box { max-width: 700px; margin: -1.5rem auto 2rem; padding: 0 1rem; }
+    .search-box form { display: flex; background: #fff; border-radius: 8px; box-shadow: 0 2px 12px rgba(0,0,0,0.1); overflow: hidden; }
+    .search-box input { flex: 1; border: none; padding: 1rem 1.2rem; font-size: 1rem; outline: none; }
+    .search-box button { background: #1a73e8; color: #fff; border: none; padding: 0 1.5rem; font-size: 1rem; cursor: pointer; }
+    .search-box button:hover { background: #1557b0; }
+    .results { max-width: 700px; margin: 0 auto 3rem; padding: 0 1rem; }
+    .result-count { font-size: 0.85rem; color: #666; margin-bottom: 1rem; }
+    .result-card { background: #fff; border-radius: 8px; padding: 1.2rem; margin-bottom: 1rem; box-shadow: 0 1px 4px rgba(0,0,0,0.06); }
+    .result-meta { display: flex; gap: 0.8rem; margin-bottom: 0.6rem; flex-wrap: wrap; }
+    .result-file { font-size: 0.78rem; background: #e8f0fe; color: #1a73e8; padding: 2px 8px; border-radius: 4px; }
+    .result-section { font-size: 0.78rem; background: #fce8e6; color: #c5221f; padding: 2px 8px; border-radius: 4px; }
+    .result-snippet { font-size: 0.92rem; line-height: 1.6; color: #444; }
+    .result-snippet mark { background: #fff3cd; padding: 0 2px; border-radius: 2px; }
+    .empty { text-align: center; color: #999; padding: 3rem 1rem; font-size: 0.95rem; }
+  </style>
+</head>
+<body>
+  <div class="header">
+    <h1>科研资料检索助手</h1>
+    <p>基于 OceanBase SeekDB (pyseekdb) 的 Markdown 段落全文检索</p>
+  </div>
+  <div class="search-box">
+    <form method="get" action="/">
+      <input type="text" name="q" value="{{ query }}" placeholder="输入关键词，如：Transformer 预训练模型" autofocus>
+      <button type="submit">搜索</button>
+    </form>
+  </div>
+  <div class="results">
+    {% if query %}
+      {% if error %}
+        <div class="result-count" style="color:#c5221f;">检索出错: {{ error }}</div>
+      {% else %}
+        <div class="result-count">找到 {{ results|length }} 条结果 <span style="color:#1a73e8;">(数据来源: OceanBase SeekDB via pyseekdb)</span></div>
+      {% endif %}
+      {% if results|length == 0 and not error %}
+        <div class="empty">未匹配到相关段落</div>
+      {% endif %}
+      {% for r in results %}
+      <div class="result-card">
+        <div class="result-meta">
+          <span class="result-file">{{ r.file }}</span>
+          <span class="result-section">{{ r.section }}</span>
+        </div>
+        <div class="result-snippet">{{ r.snippet|safe }}</div>
+      </div>
+      {% endfor %}
+    {% else %}
+      <div class="empty">输入关键词开始检索</div>
+    {% endif %}
+  </div>
+</body>
+</html>

@@ -1,0 +1,495 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>科研资料检索助手 - 项目展示</title>
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body {
+      font-family: -apple-system, "Noto Sans SC", "Microsoft YaHei", sans-serif;
+      background: #f5f7fa;
+      color: #333;
+      line-height: 1.6;
+    }
+    .hero {
+      background: linear-gradient(135deg, #1a73e8 0%, #4285f4 50%, #669df6 100%);
+      color: #fff;
+      padding: 4rem 2rem;
+      text-align: center;
+    }
+    .hero h1 {
+      font-size: 2.5rem;
+      margin-bottom: 1rem;
+      font-weight: 600;
+    }
+    .hero p {
+      font-size: 1.2rem;
+      opacity: 0.95;
+      max-width: 700px;
+      margin: 0 auto;
+    }
+    .badge {
+      display: inline-block;
+      background: rgba(255,255,255,0.2);
+      padding: 0.4rem 1rem;
+      border-radius: 20px;
+      font-size: 0.9rem;
+      margin-top: 1.5rem;
+      backdrop-filter: blur(10px);
+    }
+    .container {
+      max-width: 1000px;
+      margin: 0 auto;
+      padding: 2rem;
+    }
+    .section {
+      background: #fff;
+      border-radius: 12px;
+      padding: 2rem;
+      margin-bottom: 2rem;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+    }
+    .section h2 {
+      color: #1a73e8;
+      font-size: 1.5rem;
+      margin-bottom: 1rem;
+      padding-bottom: 0.5rem;
+      border-bottom: 2px solid #e8f0fe;
+    }
+    .section h3 {
+      color: #444;
+      font-size: 1.1rem;
+      margin: 1.5rem 0 0.8rem 0;
+    }
+    .feature-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 1.5rem;
+      margin-top: 1.5rem;
+    }
+    .feature-card {
+      background: #f8f9fa;
+      border-radius: 8px;
+      padding: 1.5rem;
+      border-left: 4px solid #1a73e8;
+    }
+    .feature-card h4 {
+      color: #1a73e8;
+      margin-bottom: 0.5rem;
+      font-size: 1rem;
+    }
+    .feature-card p {
+      color: #666;
+      font-size: 0.95rem;
+    }
+    .tech-stack {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.8rem;
+      margin-top: 1rem;
+    }
+    .tech-tag {
+      background: #e8f0fe;
+      color: #1a73e8;
+      padding: 0.5rem 1rem;
+      border-radius: 6px;
+      font-size: 0.9rem;
+      font-weight: 500;
+    }
+    .result-table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-top: 1rem;
+    }
+    .result-table th {
+      background: #f8f9fa;
+      padding: 1rem;
+      text-align: left;
+      font-weight: 600;
+      color: #444;
+      border-bottom: 2px solid #e0e0e0;
+    }
+    .result-table td {
+      padding: 1rem;
+      border-bottom: 1px solid #e0e0e0;
+    }
+    .result-table tr:hover {
+      background: #f8f9fa;
+    }
+    .hit-count {
+      display: inline-block;
+      background: #34a853;
+      color: #fff;
+      padding: 0.3rem 0.8rem;
+      border-radius: 4px;
+      font-weight: 600;
+      font-size: 0.9rem;
+    }
+    .zero-count {
+      background: #9aa0a6;
+    }
+    .code-block {
+      background: #1e1e1e;
+      color: #d4d4d4;
+      padding: 1.5rem;
+      border-radius: 8px;
+      overflow-x: auto;
+      font-family: "Consolas", "Monaco", monospace;
+      font-size: 0.9rem;
+      line-height: 1.5;
+      margin-top: 1rem;
+    }
+    .code-block .comment { color: #6a9955; }
+    .code-block .keyword { color: #569cd6; }
+    .code-block .string { color: #ce9178; }
+    .code-block .number { color: #b5cea8; }
+    .screenshot-placeholder {
+      background: #f8f9fa;
+      border: 2px dashed #dadce0;
+      border-radius: 8px;
+      padding: 3rem 2rem;
+      text-align: center;
+      color: #9aa0a6;
+      margin-top: 1rem;
+    }
+    .screenshot-placeholder::before {
+      content: "📷";
+      display: block;
+      font-size: 3rem;
+      margin-bottom: 1rem;
+    }
+    .repo-link {
+      display: inline-block;
+      background: #24292e;
+      color: #fff;
+      padding: 0.8rem 1.5rem;
+      border-radius: 6px;
+      text-decoration: none;
+      font-weight: 500;
+      margin-top: 1rem;
+      transition: background 0.2s;
+    }
+    .repo-link:hover {
+      background: #444;
+    }
+    .repo-link::before {
+      content: "📦 ";
+    }
+    .setup-steps {
+      counter-reset: step-counter;
+      list-style: none;
+    }
+    .setup-steps li {
+      counter-increment: step-counter;
+      padding: 1rem 1rem 1rem 3.5rem;
+      position: relative;
+      margin-bottom: 0.5rem;
+      background: #f8f9fa;
+      border-radius: 6px;
+    }
+    .setup-steps li::before {
+      content: counter(step-counter);
+      position: absolute;
+      left: 1rem;
+      top: 1rem;
+      background: #1a73e8;
+      color: #fff;
+      width: 1.8rem;
+      height: 1.8rem;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: 600;
+      font-size: 0.9rem;
+    }
+    .highlight-box {
+      background: #fef7e0;
+      border-left: 4px solid #f9ab00;
+      padding: 1rem 1.5rem;
+      border-radius: 0 6px 6px 0;
+      margin: 1rem 0;
+    }
+    .highlight-box strong {
+      color: #e37400;
+    }
+    footer {
+      text-align: center;
+      padding: 2rem;
+      color: #9aa0a6;
+      font-size: 0.9rem;
+    }
+  </style>
+</head>
+<body>
+  <div class="hero">
+    <h1>科研资料检索助手</h1>
+    <p>基于 OceanBase SeekDB 的 Markdown 段落全文检索工具，支持语义搜索、高亮显示和智能过滤</p>
+    <div class="badge">🎯 OceanBase 2026 竞赛项目</div>
+  </div>
+
+  <div class="container">
+    <!-- 项目简介 -->
+    <div class="section">
+      <h2>📖 项目简介</h2>
+      <p>
+        科研资料检索助手是一个面向研究者的智能检索工具，能够将 Markdown 格式的科研资料解析为段落，
+        并使用 <strong>OceanBase SeekDB (pyseekdb)</strong> 进行高效的全文检索。系统支持中文分词、
+        关键词高亮、智能过滤误匹配，并提供简洁的 Web 界面和 CLI 验证工具。
+      </p>
+
+      <div class="feature-grid">
+        <div class="feature-card">
+          <h4>🔍 全文检索</h4>
+          <p>基于 SeekDB 的 ik 分词器，支持中英文混合搜索，快速定位相关段落</p>
+        </div>
+        <div class="feature-card">
+          <h4>✨ 智能过滤</h4>
+          <p>二次验证机制，自动过滤误匹配结果，确保搜索准确性</p>
+        </div>
+        <div class="feature-card">
+          <h4>🎨 高亮显示</h4>
+          <p>搜索结果自动高亮关键词，原文转义防止 XSS 攻击</p>
+        </div>
+        <div class="feature-card">
+          <h4>📊 元数据展示</h4>
+          <p>显示来源文件、章节信息，方便追溯原文上下文</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- 技术架构 -->
+    <div class="section">
+      <h2>🏗️ 技术架构</h2>
+      <div class="tech-stack">
+        <span class="tech-tag">Python 3.12+</span>
+        <span class="tech-tag">pyseekdb 1.4.0</span>
+        <span class="tech-tag">OceanBase SeekDB</span>
+        <span class="tech-tag">Flask 3.1</span>
+        <span class="tech-tag">IK 分词器</span>
+        <span class="tech-tag">WSL</span>
+      </div>
+
+      <h3>核心组件</h3>
+      <ul style="margin-left: 2rem; margin-top: 0.5rem;">
+        <li><strong>seekdb/store.py</strong> — SeekDB 封装层，实现全文检索、结果过滤、高亮生成</li>
+        <li><strong>seekdb/parser.py</strong> — Markdown 解析器，按标题分割段落并保留章节信息</li>
+        <li><strong>app.py</strong> — Flask Web 应用，提供搜索界面和自动索引</li>
+        <li><strong>verify_seekdb.py</strong> — CLI 验证脚本，证明结果来自 SeekDB</li>
+        <li><strong>config.py</strong> — 共享配置，支持环境变量自定义依赖路径</li>
+      </ul>
+    </div>
+
+    <!-- 验证结果 -->
+    <div class="section">
+      <h2>✅ 真实验证结果</h2>
+      <p>以下结果从干净数据库（空目录）开始，按 README 步骤实际运行得出：</p>
+
+      <h3>索引统计</h3>
+      <div class="highlight-box">
+        <strong>索引段落总数：22 个</strong><br>
+        来源：2 个 Markdown 文件（deep_learning_nlp.md、oceanbase_whitepaper.md）<br>
+        重复导入测试：删除 .indexed 标志后重新索引，段落数保持 22（幂等性验证通过）
+      </div>
+
+      <h3>搜索测试</h3>
+      <table class="result-table">
+        <thead>
+          <tr>
+            <th>查询词</th>
+            <th>命中数</th>
+            <th>说明</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><code>Transformer 预训练</code></td>
+            <td><span class="hit-count">5 条</span></td>
+            <td>命中 deep_learning_nlp.md 中的文本分类、摘要、架构、翻译、模型章节</td>
+          </tr>
+          <tr>
+            <td><code>量子计算 超导</code></td>
+            <td><span class="hit-count zero-count">0 条</span></td>
+            <td>无匹配（二次过滤去除了误匹配"Query"英文词的结果）</td>
+          </tr>
+          <tr>
+            <td><code>分布式数据库 HTAP</code></td>
+            <td><span class="hit-count">1 条</span></td>
+            <td>命中 oceanbase_whitepaper.md 概述章节</td>
+          </tr>
+          <tr>
+            <td><code>Paxos 一致性</code></td>
+            <td><span class="hit-count">2 条</span></td>
+            <td>命中分布式事务章节</td>
+          </tr>
+        </tbody>
+      </table>
+
+      <h3>CLI 验证输出示例</h3>
+      <div class="code-block">
+<span class="comment">=== SeekDB (pyseekdb) Full-Text Search Verification ===</span>
+Database path: /home/liqiao/seekdb_research_data
+Collection: research_paragraphs
+
+Paragraphs in store: <span class="number">22</span>
+
+Query: <span class="string">Transformer 预训练</span>
+------------------------------------------------------------
+Results: <span class="number">5</span> hits
+
+[<span class="number">1</span>] file=<span class="keyword">deep_learning_nlp.md</span>  section=<span class="keyword">文本分类应用</span>
+    snippet: 基于&lt;mark&gt;预训练&lt;/mark&gt;模型的文本分类方法通常包括两个阶段...
+
+[<span class="number">2</span>] file=<span class="keyword">deep_learning_nlp.md</span>  section=<span class="keyword">摘要</span>
+    snippet: 深度学习技术近年来在自然语言处理（NLP）领域取得了显著进展...
+
+...
+
+Query: <span class="string">量子计算 超导</span>
+------------------------------------------------------------
+Results: <span class="number">0</span> hits
+(no matches)
+
+<span class="comment">=== All results retrieved from OceanBase SeekDB via pyseekdb ===</span>
+      </div>
+    </div>
+
+    <!-- 网页截图 -->
+    <div class="section">
+      <h2>🖼️ 网页界面</h2>
+      <p>启动 Web 服务后，访问 <code>http://localhost:5000</code> 即可使用搜索界面：</p>
+
+      <figure style="margin: 1.5rem 0;">
+        <img src="assets/search-demo.png" alt="科研资料检索助手搜索界面" style="width: 100%; border-radius: 8px; box-shadow: 0 4px 12px rgba(0,0,0,0.15);">
+        <figcaption style="text-align: center; color: #666; font-size: 0.9rem; margin-top: 0.8rem; font-style: italic;">
+          搜索 Transformer 预训练，返回 5 条结果，并显示文件名、章节和原文片段
+        </figcaption>
+      </figure>
+
+      <p style="margin-top: 1rem; color: #666; font-size: 0.95rem;">
+        <strong>界面特性：</strong>搜索结果显示文件标签、章节标签、高亮摘要；零结果时显示友好提示；
+        错误时显示红色错误信息（与零结果区分）
+      </p>
+    </div>
+
+    <!-- 代码仓库 -->
+    <div class="section">
+      <h2>📦 代码仓库</h2>
+      <p>项目代码托管在 Git 仓库，包含完整的实现、测试数据和文档：</p>
+
+      <a href="https://github.com/qiaoli96/powercontext/tree/2026-competition-ecosystem/qoder" class="repo-link" target="_blank" rel="noopener">
+        访问代码仓库（待填写真实链接）
+      </a>
+
+      <p style="margin-top: 1rem; color: #666; font-size: 0.95rem;">
+        <strong>仓库结构：</strong>
+      </p>
+      <div class="code-block">
+qoder/
+├── app.py                 <span class="comment"># Flask 主程序</span>
+├── config.py              <span class="comment"># 共享配置</span>
+├── verify_seekdb.py       <span class="comment"># CLI 验证脚本</span>
+├── seekdb/
+│   ├── __init__.py
+│   ├── parser.py          <span class="comment"># Markdown 解析器</span>
+│   └── store.py           <span class="comment"># SeekDB 全文检索</span>
+├── data/
+│   ├── deep_learning_nlp.md
+│   └── oceanbase_whitepaper.md
+├── templates/
+│   └── index.html         <span class="comment"># 搜索页面模板</span>
+├── requirements.txt
+├── .gitignore
+└── README.md
+      </div>
+    </div>
+
+    <!-- 本地复现 -->
+    <div class="section">
+      <h2>🚀 本地复现步骤</h2>
+      <p>评审可在干净的 WSL 环境中按以下步骤复现所有结果：</p>
+
+      <ol class="setup-steps">
+        <li>
+          <strong>安装 WSL 和系统依赖</strong><br>
+          <code style="background: #e8e8e8; padding: 0.2rem 0.5rem; border-radius: 3px; font-size: 0.85rem;">
+            wsl && sudo apt-get update && sudo apt-get install -y python3-pip python3-venv
+          </code>
+        </li>
+        <li>
+          <strong>克隆项目并进入目录</strong><br>
+          <code style="background: #e8e8e8; padding: 0.2rem 0.5rem; border-radius: 3px; font-size: 0.85rem;">
+            cd /mnt/f/oceanbase_competition/powerContext/codes/powercontext-qoder/qoder
+          </code>
+        </li>
+        <li>
+          <strong>创建虚拟环境并安装依赖</strong><br>
+          <code style="background: #e8e8e8; padding: 0.2rem 0.5rem; border-radius: 3px; font-size: 0.85rem;">
+            python3 -m venv venv && source venv/bin activate && pip install -r requirements.txt
+          </code>
+        </li>
+        <li>
+          <strong>运行 CLI 验证</strong><br>
+          <code style="background: #e8e8e8; padding: 0.2rem 0.5rem; border-radius: 3px; font-size: 0.85rem;">
+            python verify_seekdb.py
+          </code><br>
+          <small style="color: #666;">预期输出：22 个段落，"Transformer 预训练" 5 条，"量子计算 超导" 0 条</small>
+        </li>
+        <li>
+          <strong>启动 Web 服务</strong><br>
+          <code style="background: #e8e8e8; padding: 0.2rem 0.5rem; border-radius: 3px; font-size: 0.85rem;">
+            python app.py
+          </code><br>
+          <small style="color: #666;">浏览器打开 http://localhost:5000 测试搜索</small>
+        </li>
+      </ol>
+
+      <div class="highlight-box">
+        <strong>💡 提示：</strong>如果已有安装 pyseekdb 的环境，可通过环境变量复用：<br>
+        <code style="background: #e8e8e8; padding: 0.2rem 0.5rem; border-radius: 3px; font-size: 0.85rem;">
+          export SEEKDB_DEPS=/path/to/pyseekdb/deps
+        </code>
+      </div>
+
+      <p style="margin-top: 1.5rem;">
+        详细步骤请参见 <a href="README.md" style="color: #1a73e8;">README.md</a>
+      </p>
+    </div>
+
+    <!-- 核心实现 -->
+    <div class="section">
+      <h2>💡 核心实现亮点</h2>
+
+      <h3>1. 幂等索引</h3>
+      <p>
+        重新导入相同资料不会导致段落重复。索引前调用 <code>db.clear()</code> 清空集合，
+        确保段落数始终为 22（即使删除 .indexed 标志后重新运行）。
+      </p>
+
+      <h3>2. 智能过滤误匹配</h3>
+      <p>
+        SeekDB 全文索引可能匹配到无关内容（如"量子计算 超导"匹配到包含"Query"英文词的段落）。
+        系统在返回结果后进行二次验证，检查原文是否真正包含查询词，过滤掉误匹配。
+      </p>
+
+      <h3>3. HTML 安全转义</h3>
+      <p>
+        生成高亮摘要时，先对原文调用 <code>html.escape()</code> 转义特殊字符，
+        再应用 <code>&lt;mark&gt;</code> 标签，防止 XSS 攻击。
+      </p>
+
+      <h3>4. 错误与零结果区分</h3>
+      <p>
+        Web 界面明确区分"检索出错"（红色错误提示）和"零结果"（灰色友好提示），
+        帮助快速定位问题。
+      </p>
+    </div>
+  </div>
+
+  <footer>
+    <p>科研资料检索助手 — OceanBase 2026 竞赛项目</p>
+    <p style="margin-top: 0.5rem;">基于 OceanBase SeekDB (pyseekdb) 构建</p>
+  </footer>
+</body>
+</html>
