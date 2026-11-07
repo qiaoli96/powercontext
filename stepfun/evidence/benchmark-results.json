@@ -1,0 +1,2119 @@
+{
+  "origin": "http://127.0.0.1:5173",
+  "gpu": {
+    "exposed": true,
+    "adapter": false,
+    "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/156.0.0.0 Safari/537.36"
+  },
+  "corpus": [
+    [
+      "battery.md",
+      "Battery health improves when a laptop limits charging to 80 percent."
+    ],
+    [
+      "bread.md",
+      "Sourdough bread ferments overnight before shaping and baking."
+    ],
+    [
+      "database.md",
+      "Hybrid search combines keyword matching with vector similarity."
+    ],
+    [
+      "network.md",
+      "A wireless router can improve coverage by choosing a less crowded channel."
+    ],
+    [
+      "telescope.md",
+      "An optical telescope collects faint light from distant galaxies."
+    ],
+    [
+      "plants.md",
+      "Plants use sunlight and chlorophyll for photosynthesis."
+    ],
+    [
+      "cycling.md",
+      "A bicycle chain needs lubrication to reduce friction and wear."
+    ],
+    [
+      "music.md",
+      "A metronome helps musicians maintain a steady tempo when practicing."
+    ]
+  ],
+  "queries": [
+    [
+      "battery charge limit",
+      "battery.md"
+    ],
+    [
+      "overnight sourdough fermentation",
+      "bread.md"
+    ],
+    [
+      "keyword and semantic retrieval",
+      "database.md"
+    ],
+    [
+      "wireless router channel",
+      "network.md"
+    ],
+    [
+      "observe distant galaxies",
+      "telescope.md"
+    ],
+    [
+      "chlorophyll sunlight",
+      "plants.md"
+    ],
+    [
+      "lubricate bicycle chain",
+      "cycling.md"
+    ],
+    [
+      "practice steady tempo",
+      "music.md"
+    ]
+  ],
+  "quality": {
+    "q8": [
+      {
+        "round": 1,
+        "query": "battery charge limit",
+        "expected": "battery.md",
+        "files": [
+          "battery.md",
+          "plants.md",
+          "database.md",
+          "network.md",
+          "cycling.md"
+        ]
+      },
+      {
+        "round": 1,
+        "query": "overnight sourdough fermentation",
+        "expected": "bread.md",
+        "files": [
+          "bread.md",
+          "cycling.md",
+          "telescope.md",
+          "plants.md",
+          "music.md"
+        ]
+      },
+      {
+        "round": 1,
+        "query": "keyword and semantic retrieval",
+        "expected": "database.md",
+        "files": [
+          "database.md",
+          "plants.md",
+          "bread.md",
+          "cycling.md",
+          "music.md"
+        ]
+      },
+      {
+        "round": 1,
+        "query": "wireless router channel",
+        "expected": "network.md",
+        "files": [
+          "network.md",
+          "bread.md",
+          "cycling.md",
+          "telescope.md",
+          "battery.md"
+        ]
+      },
+      {
+        "round": 1,
+        "query": "observe distant galaxies",
+        "expected": "telescope.md",
+        "files": [
+          "telescope.md",
+          "network.md",
+          "plants.md",
+          "database.md",
+          "bread.md"
+        ]
+      },
+      {
+        "round": 1,
+        "query": "chlorophyll sunlight",
+        "expected": "plants.md",
+        "files": [
+          "plants.md",
+          "telescope.md",
+          "music.md",
+          "database.md",
+          "battery.md"
+        ]
+      },
+      {
+        "round": 1,
+        "query": "lubricate bicycle chain",
+        "expected": "cycling.md",
+        "files": [
+          "cycling.md",
+          "bread.md",
+          "music.md",
+          "telescope.md",
+          "network.md"
+        ]
+      },
+      {
+        "round": 1,
+        "query": "practice steady tempo",
+        "expected": "music.md",
+        "files": [
+          "music.md",
+          "cycling.md",
+          "bread.md",
+          "database.md",
+          "battery.md"
+        ]
+      },
+      {
+        "round": 2,
+        "query": "battery charge limit",
+        "expected": "battery.md",
+        "files": [
+          "battery.md",
+          "plants.md",
+          "database.md",
+          "network.md",
+          "cycling.md"
+        ]
+      },
+      {
+        "round": 2,
+        "query": "overnight sourdough fermentation",
+        "expected": "bread.md",
+        "files": [
+          "bread.md",
+          "cycling.md",
+          "telescope.md",
+          "plants.md",
+          "music.md"
+        ]
+      },
+      {
+        "round": 2,
+        "query": "keyword and semantic retrieval",
+        "expected": "database.md",
+        "files": [
+          "database.md",
+          "plants.md",
+          "bread.md",
+          "cycling.md",
+          "music.md"
+        ]
+      },
+      {
+        "round": 2,
+        "query": "wireless router channel",
+        "expected": "network.md",
+        "files": [
+          "network.md",
+          "bread.md",
+          "cycling.md",
+          "telescope.md",
+          "battery.md"
+        ]
+      },
+      {
+        "round": 2,
+        "query": "observe distant galaxies",
+        "expected": "telescope.md",
+        "files": [
+          "telescope.md",
+          "network.md",
+          "plants.md",
+          "database.md",
+          "bread.md"
+        ]
+      },
+      {
+        "round": 2,
+        "query": "chlorophyll sunlight",
+        "expected": "plants.md",
+        "files": [
+          "plants.md",
+          "telescope.md",
+          "music.md",
+          "database.md",
+          "battery.md"
+        ]
+      },
+      {
+        "round": 2,
+        "query": "lubricate bicycle chain",
+        "expected": "cycling.md",
+        "files": [
+          "cycling.md",
+          "bread.md",
+          "music.md",
+          "telescope.md",
+          "network.md"
+        ]
+      },
+      {
+        "round": 2,
+        "query": "practice steady tempo",
+        "expected": "music.md",
+        "files": [
+          "music.md",
+          "cycling.md",
+          "bread.md",
+          "database.md",
+          "battery.md"
+        ]
+      },
+      {
+        "round": 3,
+        "query": "battery charge limit",
+        "expected": "battery.md",
+        "files": [
+          "battery.md",
+          "plants.md",
+          "database.md",
+          "network.md",
+          "cycling.md"
+        ]
+      },
+      {
+        "round": 3,
+        "query": "overnight sourdough fermentation",
+        "expected": "bread.md",
+        "files": [
+          "bread.md",
+          "cycling.md",
+          "telescope.md",
+          "plants.md",
+          "music.md"
+        ]
+      },
+      {
+        "round": 3,
+        "query": "keyword and semantic retrieval",
+        "expected": "database.md",
+        "files": [
+          "database.md",
+          "plants.md",
+          "bread.md",
+          "cycling.md",
+          "music.md"
+        ]
+      },
+      {
+        "round": 3,
+        "query": "wireless router channel",
+        "expected": "network.md",
+        "files": [
+          "network.md",
+          "bread.md",
+          "cycling.md",
+          "telescope.md",
+          "battery.md"
+        ]
+      },
+      {
+        "round": 3,
+        "query": "observe distant galaxies",
+        "expected": "telescope.md",
+        "files": [
+          "telescope.md",
+          "network.md",
+          "plants.md",
+          "database.md",
+          "bread.md"
+        ]
+      },
+      {
+        "round": 3,
+        "query": "chlorophyll sunlight",
+        "expected": "plants.md",
+        "files": [
+          "plants.md",
+          "telescope.md",
+          "music.md",
+          "database.md",
+          "battery.md"
+        ]
+      },
+      {
+        "round": 3,
+        "query": "lubricate bicycle chain",
+        "expected": "cycling.md",
+        "files": [
+          "cycling.md",
+          "bread.md",
+          "music.md",
+          "telescope.md",
+          "network.md"
+        ]
+      },
+      {
+        "round": 3,
+        "query": "practice steady tempo",
+        "expected": "music.md",
+        "files": [
+          "music.md",
+          "cycling.md",
+          "bread.md",
+          "database.md",
+          "battery.md"
+        ]
+      }
+    ],
+    "fp32": [
+      {
+        "round": 1,
+        "query": "battery charge limit",
+        "expected": "battery.md",
+        "files": [
+          "battery.md",
+          "plants.md",
+          "database.md",
+          "network.md",
+          "cycling.md"
+        ]
+      },
+      {
+        "round": 1,
+        "query": "overnight sourdough fermentation",
+        "expected": "bread.md",
+        "files": [
+          "bread.md",
+          "cycling.md",
+          "telescope.md",
+          "plants.md",
+          "music.md"
+        ]
+      },
+      {
+        "round": 1,
+        "query": "keyword and semantic retrieval",
+        "expected": "database.md",
+        "files": [
+          "database.md",
+          "plants.md",
+          "bread.md",
+          "cycling.md",
+          "music.md"
+        ]
+      },
+      {
+        "round": 1,
+        "query": "wireless router channel",
+        "expected": "network.md",
+        "files": [
+          "network.md",
+          "bread.md",
+          "telescope.md",
+          "cycling.md",
+          "battery.md"
+        ]
+      },
+      {
+        "round": 1,
+        "query": "observe distant galaxies",
+        "expected": "telescope.md",
+        "files": [
+          "telescope.md",
+          "network.md",
+          "plants.md",
+          "database.md",
+          "bread.md"
+        ]
+      },
+      {
+        "round": 1,
+        "query": "chlorophyll sunlight",
+        "expected": "plants.md",
+        "files": [
+          "plants.md",
+          "telescope.md",
+          "music.md",
+          "database.md",
+          "bread.md"
+        ]
+      },
+      {
+        "round": 1,
+        "query": "lubricate bicycle chain",
+        "expected": "cycling.md",
+        "files": [
+          "cycling.md",
+          "bread.md",
+          "music.md",
+          "telescope.md",
+          "network.md"
+        ]
+      },
+      {
+        "round": 1,
+        "query": "practice steady tempo",
+        "expected": "music.md",
+        "files": [
+          "music.md",
+          "cycling.md",
+          "bread.md",
+          "database.md",
+          "battery.md"
+        ]
+      },
+      {
+        "round": 2,
+        "query": "battery charge limit",
+        "expected": "battery.md",
+        "files": [
+          "battery.md",
+          "plants.md",
+          "database.md",
+          "network.md",
+          "cycling.md"
+        ]
+      },
+      {
+        "round": 2,
+        "query": "overnight sourdough fermentation",
+        "expected": "bread.md",
+        "files": [
+          "bread.md",
+          "cycling.md",
+          "telescope.md",
+          "plants.md",
+          "music.md"
+        ]
+      },
+      {
+        "round": 2,
+        "query": "keyword and semantic retrieval",
+        "expected": "database.md",
+        "files": [
+          "database.md",
+          "plants.md",
+          "bread.md",
+          "cycling.md",
+          "music.md"
+        ]
+      },
+      {
+        "round": 2,
+        "query": "wireless router channel",
+        "expected": "network.md",
+        "files": [
+          "network.md",
+          "bread.md",
+          "telescope.md",
+          "cycling.md",
+          "battery.md"
+        ]
+      },
+      {
+        "round": 2,
+        "query": "observe distant galaxies",
+        "expected": "telescope.md",
+        "files": [
+          "telescope.md",
+          "network.md",
+          "plants.md",
+          "database.md",
+          "bread.md"
+        ]
+      },
+      {
+        "round": 2,
+        "query": "chlorophyll sunlight",
+        "expected": "plants.md",
+        "files": [
+          "plants.md",
+          "telescope.md",
+          "music.md",
+          "database.md",
+          "bread.md"
+        ]
+      },
+      {
+        "round": 2,
+        "query": "lubricate bicycle chain",
+        "expected": "cycling.md",
+        "files": [
+          "cycling.md",
+          "bread.md",
+          "music.md",
+          "telescope.md",
+          "network.md"
+        ]
+      },
+      {
+        "round": 2,
+        "query": "practice steady tempo",
+        "expected": "music.md",
+        "files": [
+          "music.md",
+          "cycling.md",
+          "bread.md",
+          "database.md",
+          "battery.md"
+        ]
+      },
+      {
+        "round": 3,
+        "query": "battery charge limit",
+        "expected": "battery.md",
+        "files": [
+          "battery.md",
+          "plants.md",
+          "database.md",
+          "network.md",
+          "cycling.md"
+        ]
+      },
+      {
+        "round": 3,
+        "query": "overnight sourdough fermentation",
+        "expected": "bread.md",
+        "files": [
+          "bread.md",
+          "cycling.md",
+          "telescope.md",
+          "plants.md",
+          "music.md"
+        ]
+      },
+      {
+        "round": 3,
+        "query": "keyword and semantic retrieval",
+        "expected": "database.md",
+        "files": [
+          "database.md",
+          "plants.md",
+          "bread.md",
+          "cycling.md",
+          "music.md"
+        ]
+      },
+      {
+        "round": 3,
+        "query": "wireless router channel",
+        "expected": "network.md",
+        "files": [
+          "network.md",
+          "bread.md",
+          "telescope.md",
+          "cycling.md",
+          "battery.md"
+        ]
+      },
+      {
+        "round": 3,
+        "query": "observe distant galaxies",
+        "expected": "telescope.md",
+        "files": [
+          "telescope.md",
+          "network.md",
+          "plants.md",
+          "database.md",
+          "bread.md"
+        ]
+      },
+      {
+        "round": 3,
+        "query": "chlorophyll sunlight",
+        "expected": "plants.md",
+        "files": [
+          "plants.md",
+          "telescope.md",
+          "music.md",
+          "database.md",
+          "bread.md"
+        ]
+      },
+      {
+        "round": 3,
+        "query": "lubricate bicycle chain",
+        "expected": "cycling.md",
+        "files": [
+          "cycling.md",
+          "bread.md",
+          "music.md",
+          "telescope.md",
+          "network.md"
+        ]
+      },
+      {
+        "round": 3,
+        "query": "practice steady tempo",
+        "expected": "music.md",
+        "files": [
+          "music.md",
+          "cycling.md",
+          "bread.md",
+          "database.md",
+          "battery.md"
+        ]
+      }
+    ]
+  },
+  "incrementalStatus": "索引已刷新。当前知识库共 9 个段落。",
+  "afterImport": [
+    "meteorite.md",
+    "music.md",
+    "database.md",
+    "plants.md",
+    "telescope.md"
+  ],
+  "isolated": [
+    "other.md"
+  ],
+  "afterSwitchBack": [
+    "meteorite.md",
+    "music.md",
+    "database.md",
+    "plants.md",
+    "telescope.md"
+  ],
+  "timings": [
+    {
+      "action": "import",
+      "kb": "bench-1794066820315",
+      "precision": "q8",
+      "preference": "auto",
+      "device": "wasm",
+      "batchSize": 4,
+      "rows": 8,
+      "loadMs": 387313.90000000596,
+      "embeddingMs": 63.900000005960464,
+      "writeMs": 228.74539999989793,
+      "refreshMs": 330.0529999998398,
+      "at": "2026-11-07T16:00:08.464Z",
+      "model": "Xenova/all-MiniLM-L6-v2",
+      "revision": "751bff3",
+      "browser": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/156.0.0.0 Safari/537.36"
+    },
+    {
+      "action": "import",
+      "kb": "bench-1794066820315",
+      "precision": "q8",
+      "preference": "auto",
+      "device": "wasm",
+      "batchSize": 1,
+      "rows": 8,
+      "loadMs": 0,
+      "embeddingMs": 227.2000000178814,
+      "writeMs": 915.4794999998994,
+      "refreshMs": 451.8322000000626,
+      "at": "2026-11-07T16:00:10.155Z",
+      "model": "Xenova/all-MiniLM-L6-v2",
+      "revision": "751bff3",
+      "browser": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/156.0.0.0 Safari/537.36"
+    },
+    {
+      "action": "import",
+      "kb": "bench-1794066820315",
+      "precision": "q8",
+      "preference": "auto",
+      "device": "wasm",
+      "batchSize": 4,
+      "rows": 8,
+      "loadMs": 0,
+      "embeddingMs": 152.09999999403954,
+      "writeMs": 762.5,
+      "refreshMs": 427.9560000002384,
+      "at": "2026-11-07T16:00:11.591Z",
+      "model": "Xenova/all-MiniLM-L6-v2",
+      "revision": "751bff3",
+      "browser": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/156.0.0.0 Safari/537.36"
+    },
+    {
+      "action": "import",
+      "kb": "bench-1794066820315",
+      "precision": "q8",
+      "preference": "auto",
+      "device": "wasm",
+      "batchSize": 4,
+      "rows": 8,
+      "loadMs": 0,
+      "embeddingMs": 224.89999997615814,
+      "writeMs": 45.53530000010505,
+      "refreshMs": 427.20499999960884,
+      "at": "2026-11-07T16:00:12.386Z",
+      "model": "Xenova/all-MiniLM-L6-v2",
+      "revision": "751bff3",
+      "browser": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/156.0.0.0 Safari/537.36"
+    },
+    {
+      "action": "import",
+      "kb": "bench-1794066820315",
+      "precision": "q8",
+      "preference": "auto",
+      "device": "wasm",
+      "batchSize": 1,
+      "rows": 8,
+      "loadMs": 0,
+      "embeddingMs": 245.2000000178814,
+      "writeMs": 77.21740000043064,
+      "refreshMs": 333.66569999977946,
+      "at": "2026-11-07T16:00:13.237Z",
+      "model": "Xenova/all-MiniLM-L6-v2",
+      "revision": "751bff3",
+      "browser": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/156.0.0.0 Safari/537.36"
+    },
+    {
+      "action": "import",
+      "kb": "bench-1794066820315",
+      "precision": "q8",
+      "preference": "auto",
+      "device": "wasm",
+      "batchSize": 1,
+      "rows": 8,
+      "loadMs": 0,
+      "embeddingMs": 246,
+      "writeMs": 27.587499999906868,
+      "refreshMs": 316.79769999999553,
+      "at": "2026-11-07T16:00:14.062Z",
+      "model": "Xenova/all-MiniLM-L6-v2",
+      "revision": "751bff3",
+      "browser": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/156.0.0.0 Safari/537.36"
+    },
+    {
+      "action": "import",
+      "kb": "bench-1794066820315",
+      "precision": "q8",
+      "preference": "auto",
+      "device": "wasm",
+      "batchSize": 4,
+      "rows": 8,
+      "loadMs": 0,
+      "embeddingMs": 219.09999999403954,
+      "writeMs": 100.25300000002608,
+      "refreshMs": 436.68949999986216,
+      "at": "2026-11-07T16:00:14.897Z",
+      "model": "Xenova/all-MiniLM-L6-v2",
+      "revision": "751bff3",
+      "browser": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/156.0.0.0 Safari/537.36"
+    },
+    {
+      "action": "search",
+      "kb": "bench-1794066820315",
+      "precision": "q8",
+      "preference": "auto",
+      "device": "wasm",
+      "query": "battery charge limit",
+      "files": [
+        "battery.md",
+        "plants.md",
+        "database.md",
+        "network.md",
+        "cycling.md"
+      ],
+      "loadMs": 0,
+      "embeddingMs": 19.099999994039536,
+      "searchMs": 56.3746999995783,
+      "endToEndMs": 82.39999997615814,
+      "at": "2026-11-07T16:00:15.075Z",
+      "model": "Xenova/all-MiniLM-L6-v2",
+      "revision": "751bff3",
+      "browser": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/156.0.0.0 Safari/537.36"
+    },
+    {
+      "action": "search",
+      "kb": "bench-1794066820315",
+      "precision": "q8",
+      "preference": "auto",
+      "device": "wasm",
+      "query": "overnight sourdough fermentation",
+      "files": [
+        "bread.md",
+        "cycling.md",
+        "telescope.md",
+        "plants.md",
+        "music.md"
+      ],
+      "loadMs": 0,
+      "embeddingMs": 24.400000005960464,
+      "searchMs": 17.413600000087172,
+      "endToEndMs": 48.30000001192093,
+      "at": "2026-11-07T16:00:15.289Z",
+      "model": "Xenova/all-MiniLM-L6-v2",
+      "revision": "751bff3",
+      "browser": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/156.0.0.0 Safari/537.36"
+    },
+    {
+      "action": "search",
+      "kb": "bench-1794066820315",
+      "precision": "q8",
+      "preference": "auto",
+      "device": "wasm",
+      "query": "keyword and semantic retrieval",
+      "files": [
+        "database.md",
+        "plants.md",
+        "bread.md",
+        "cycling.md",
+        "music.md"
+      ],
+      "loadMs": 0,
+      "embeddingMs": 25.099999994039536,
+      "searchMs": 19.98979999963194,
+      "endToEndMs": 52.30000001192093,
+      "at": "2026-11-07T16:00:15.541Z",
+      "model": "Xenova/all-MiniLM-L6-v2",
+      "revision": "751bff3",
+      "browser": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/156.0.0.0 Safari/537.36"
+    },
+    {
+      "action": "search",
+      "kb": "bench-1794066820315",
+      "precision": "q8",
+      "preference": "auto",
+      "device": "wasm",
+      "query": "wireless router channel",
+      "files": [
+        "network.md",
+        "bread.md",
+        "cycling.md",
+        "telescope.md",
+        "battery.md"
+      ],
+      "loadMs": 0,
+      "embeddingMs": 21.099999994039536,
+      "searchMs": 15.869400000199676,
+      "endToEndMs": 45,
+      "at": "2026-11-07T16:00:15.777Z",
+      "model": "Xenova/all-MiniLM-L6-v2",
+      "revision": "751bff3",
+      "browser": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/156.0.0.0 Safari/537.36"
+    },
+    {
+      "action": "search",
+      "kb": "bench-1794066820315",
+      "precision": "q8",
+      "preference": "auto",
+      "device": "wasm",
+      "query": "observe distant galaxies",
+      "files": [
+        "telescope.md",
+        "network.md",
+        "plants.md",
+        "database.md",
+        "bread.md"
+      ],
+      "loadMs": 0,
+      "embeddingMs": 17.700000017881393,
+      "searchMs": 15.921300000045449,
+      "endToEndMs": 40.20000001788139,
+      "at": "2026-11-07T16:00:16.016Z",
+      "model": "Xenova/all-MiniLM-L6-v2",
+      "revision": "751bff3",
+      "browser": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/156.0.0.0 Safari/537.36"
+    },
+    {
+      "action": "search",
+      "kb": "bench-1794066820315",
+      "precision": "q8",
+      "preference": "auto",
+      "device": "wasm",
+      "query": "chlorophyll sunlight",
+      "files": [
+        "plants.md",
+        "telescope.md",
+        "music.md",
+        "database.md",
+        "battery.md"
+      ],
+      "loadMs": 0,
+      "embeddingMs": 22.5,
+      "searchMs": 14.190900000277907,
+      "endToEndMs": 43.20000001788139,
+      "at": "2026-11-07T16:00:16.265Z",
+      "model": "Xenova/all-MiniLM-L6-v2",
+      "revision": "751bff3",
+      "browser": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/156.0.0.0 Safari/537.36"
+    },
+    {
+      "action": "search",
+      "kb": "bench-1794066820315",
+      "precision": "q8",
+      "preference": "auto",
+      "device": "wasm",
+      "query": "lubricate bicycle chain",
+      "files": [
+        "cycling.md",
+        "bread.md",
+        "music.md",
+        "telescope.md",
+        "network.md"
+      ],
+      "loadMs": 0,
+      "embeddingMs": 24.599999994039536,
+      "searchMs": 19.571599999908358,
+      "endToEndMs": 51.099999994039536,
+      "at": "2026-11-07T16:00:16.524Z",
+      "model": "Xenova/all-MiniLM-L6-v2",
+      "revision": "751bff3",
+      "browser": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/156.0.0.0 Safari/537.36"
+    },
+    {
+      "action": "search",
+      "kb": "bench-1794066820315",
+      "precision": "q8",
+      "preference": "auto",
+      "device": "wasm",
+      "query": "practice steady tempo",
+      "files": [
+        "music.md",
+        "cycling.md",
+        "bread.md",
+        "database.md",
+        "battery.md"
+      ],
+      "loadMs": 0,
+      "embeddingMs": 20.099999994039536,
+      "searchMs": 16.132100000046194,
+      "endToEndMs": 45.099999994039536,
+      "at": "2026-11-07T16:00:16.761Z",
+      "model": "Xenova/all-MiniLM-L6-v2",
+      "revision": "751bff3",
+      "browser": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/156.0.0.0 Safari/537.36"
+    },
+    {
+      "action": "search",
+      "kb": "bench-1794066820315",
+      "precision": "q8",
+      "preference": "auto",
+      "device": "wasm",
+      "query": "battery charge limit",
+      "files": [
+        "battery.md",
+        "plants.md",
+        "database.md",
+        "network.md",
+        "cycling.md"
+      ],
+      "loadMs": 0,
+      "embeddingMs": 19.5,
+      "searchMs": 14.514700000174344,
+      "endToEndMs": 40.30000001192093,
+      "at": "2026-11-07T16:00:16.999Z",
+      "model": "Xenova/all-MiniLM-L6-v2",
+      "revision": "751bff3",
+      "browser": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/156.0.0.0 Safari/537.36"
+    },
+    {
+      "action": "search",
+      "kb": "bench-1794066820315",
+      "precision": "q8",
+      "preference": "auto",
+      "device": "wasm",
+      "query": "overnight sourdough fermentation",
+      "files": [
+        "bread.md",
+        "cycling.md",
+        "telescope.md",
+        "plants.md",
+        "music.md"
+      ],
+      "loadMs": 0,
+      "embeddingMs": 22.900000005960464,
+      "searchMs": 14.898800000082701,
+      "endToEndMs": 48.5,
+      "at": "2026-11-07T16:00:17.241Z",
+      "model": "Xenova/all-MiniLM-L6-v2",
+      "revision": "751bff3",
+      "browser": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/156.0.0.0 Safari/537.36"
+    },
+    {
+      "action": "search",
+      "kb": "bench-1794066820315",
+      "precision": "q8",
+      "preference": "auto",
+      "device": "wasm",
+      "query": "keyword and semantic retrieval",
+      "files": [
+        "database.md",
+        "plants.md",
+        "bread.md",
+        "cycling.md",
+        "music.md"
+      ],
+      "loadMs": 0,
+      "embeddingMs": 23.80000001192093,
+      "searchMs": 15.322800000198185,
+      "endToEndMs": 48.30000001192093,
+      "at": "2026-11-07T16:00:17.484Z",
+      "model": "Xenova/all-MiniLM-L6-v2",
+      "revision": "751bff3",
+      "browser": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/156.0.0.0 Safari/537.36"
+    },
+    {
+      "action": "search",
+      "kb": "bench-1794066820315",
+      "precision": "q8",
+      "preference": "auto",
+      "device": "wasm",
+      "query": "wireless router channel",
+      "files": [
+        "network.md",
+        "bread.md",
+        "cycling.md",
+        "telescope.md",
+        "battery.md"
+      ],
+      "loadMs": 0,
+      "embeddingMs": 20.599999994039536,
+      "searchMs": 12.900499999988824,
+      "endToEndMs": 39,
+      "at": "2026-11-07T16:00:17.719Z",
+      "model": "Xenova/all-MiniLM-L6-v2",
+      "revision": "751bff3",
+      "browser": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/156.0.0.0 Safari/537.36"
+    },
+    {
+      "action": "search",
+      "kb": "bench-1794066820315",
+      "precision": "q8",
+      "preference": "auto",
+      "device": "wasm",
+      "query": "observe distant galaxies",
+      "files": [
+        "telescope.md",
+        "network.md",
+        "plants.md",
+        "database.md",
+        "bread.md"
+      ],
+      "loadMs": 0,
+      "embeddingMs": 21.5,
+      "searchMs": 14.31430000020191,
+      "endToEndMs": 42.69999998807907,
+      "at": "2026-11-07T16:00:17.965Z",
+      "model": "Xenova/all-MiniLM-L6-v2",
+      "revision": "751bff3",
+      "browser": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/156.0.0.0 Safari/537.36"
+    },
+    {
+      "action": "search",
+      "kb": "bench-1794066820315",
+      "precision": "q8",
+      "preference": "auto",
+      "device": "wasm",
+      "query": "chlorophyll sunlight",
+      "files": [
+        "plants.md",
+        "telescope.md",
+        "music.md",
+        "database.md",
+        "battery.md"
+      ],
+      "loadMs": 0,
+      "embeddingMs": 22.899999976158142,
+      "searchMs": 15.75609999988228,
+      "endToEndMs": 45.400000005960464,
+      "at": "2026-11-07T16:00:18.206Z",
+      "model": "Xenova/all-MiniLM-L6-v2",
+      "revision": "751bff3",
+      "browser": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/156.0.0.0 Safari/537.36"
+    },
+    {
+      "action": "search",
+      "kb": "bench-1794066820315",
+      "precision": "q8",
+      "preference": "auto",
+      "device": "wasm",
+      "query": "lubricate bicycle chain",
+      "files": [
+        "cycling.md",
+        "bread.md",
+        "music.md",
+        "telescope.md",
+        "network.md"
+      ],
+      "loadMs": 0,
+      "embeddingMs": 23.799999982118607,
+      "searchMs": 16.90570000000298,
+      "endToEndMs": 49,
+      "at": "2026-11-07T16:00:18.460Z",
+      "model": "Xenova/all-MiniLM-L6-v2",
+      "revision": "751bff3",
+      "browser": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/156.0.0.0 Safari/537.36"
+    },
+    {
+      "action": "search",
+      "kb": "bench-1794066820315",
+      "precision": "q8",
+      "preference": "auto",
+      "device": "wasm",
+      "query": "practice steady tempo",
+      "files": [
+        "music.md",
+        "cycling.md",
+        "bread.md",
+        "database.md",
+        "battery.md"
+      ],
+      "loadMs": 0,
+      "embeddingMs": 21.5,
+      "searchMs": 13.91840000031516,
+      "endToEndMs": 42.5,
+      "at": "2026-11-07T16:00:18.710Z",
+      "model": "Xenova/all-MiniLM-L6-v2",
+      "revision": "751bff3",
+      "browser": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/156.0.0.0 Safari/537.36"
+    },
+    {
+      "action": "search",
+      "kb": "bench-1794066820315",
+      "precision": "q8",
+      "preference": "auto",
+      "device": "wasm",
+      "query": "battery charge limit",
+      "files": [
+        "battery.md",
+        "plants.md",
+        "database.md",
+        "network.md",
+        "cycling.md"
+      ],
+      "loadMs": 0,
+      "embeddingMs": 17.700000017881393,
+      "searchMs": 14.566700000315905,
+      "endToEndMs": 39.599999994039536,
+      "at": "2026-11-07T16:00:18.944Z",
+      "model": "Xenova/all-MiniLM-L6-v2",
+      "revision": "751bff3",
+      "browser": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/156.0.0.0 Safari/537.36"
+    },
+    {
+      "action": "search",
+      "kb": "bench-1794066820315",
+      "precision": "q8",
+      "preference": "auto",
+      "device": "wasm",
+      "query": "overnight sourdough fermentation",
+      "files": [
+        "bread.md",
+        "cycling.md",
+        "telescope.md",
+        "plants.md",
+        "music.md"
+      ],
+      "loadMs": 0,
+      "embeddingMs": 22.799999982118607,
+      "searchMs": 15.68500000005588,
+      "endToEndMs": 45.10000002384186,
+      "at": "2026-11-07T16:00:19.184Z",
+      "model": "Xenova/all-MiniLM-L6-v2",
+      "revision": "751bff3",
+      "browser": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/156.0.0.0 Safari/537.36"
+    },
+    {
+      "action": "search",
+      "kb": "bench-1794066820315",
+      "precision": "q8",
+      "preference": "auto",
+      "device": "wasm",
+      "query": "keyword and semantic retrieval",
+      "files": [
+        "database.md",
+        "plants.md",
+        "bread.md",
+        "cycling.md",
+        "music.md"
+      ],
+      "loadMs": 0,
+      "embeddingMs": 19.5,
+      "searchMs": 12.854799999855459,
+      "endToEndMs": 37.400000005960464,
+      "at": "2026-11-07T16:00:19.420Z",
+      "model": "Xenova/all-MiniLM-L6-v2",
+      "revision": "751bff3",
+      "browser": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/156.0.0.0 Safari/537.36"
+    },
+    {
+      "action": "search",
+      "kb": "bench-1794066820315",
+      "precision": "q8",
+      "preference": "auto",
+      "device": "wasm",
+      "query": "wireless router channel",
+      "files": [
+        "network.md",
+        "bread.md",
+        "cycling.md",
+        "telescope.md",
+        "battery.md"
+      ],
+      "loadMs": 0,
+      "embeddingMs": 17.899999976158142,
+      "searchMs": 10.774900000076741,
+      "endToEndMs": 33.20000001788139,
+      "at": "2026-11-07T16:00:19.653Z",
+      "model": "Xenova/all-MiniLM-L6-v2",
+      "revision": "751bff3",
+      "browser": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/156.0.0.0 Safari/537.36"
+    },
+    {
+      "action": "search",
+      "kb": "bench-1794066820315",
+      "precision": "q8",
+      "preference": "auto",
+      "device": "wasm",
+      "query": "observe distant galaxies",
+      "files": [
+        "telescope.md",
+        "network.md",
+        "plants.md",
+        "database.md",
+        "bread.md"
+      ],
+      "loadMs": 0,
+      "embeddingMs": 18.19999998807907,
+      "searchMs": 14.367300000041723,
+      "endToEndMs": 39.5,
+      "at": "2026-11-07T16:00:19.902Z",
+      "model": "Xenova/all-MiniLM-L6-v2",
+      "revision": "751bff3",
+      "browser": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/156.0.0.0 Safari/537.36"
+    },
+    {
+      "action": "search",
+      "kb": "bench-1794066820315",
+      "precision": "q8",
+      "preference": "auto",
+      "device": "wasm",
+      "query": "chlorophyll sunlight",
+      "files": [
+        "plants.md",
+        "telescope.md",
+        "music.md",
+        "database.md",
+        "battery.md"
+      ],
+      "loadMs": 0,
+      "embeddingMs": 14.400000005960464,
+      "searchMs": 8.825699999928474,
+      "endToEndMs": 27.400000005960464,
+      "at": "2026-11-07T16:00:20.133Z",
+      "model": "Xenova/all-MiniLM-L6-v2",
+      "revision": "751bff3",
+      "browser": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/156.0.0.0 Safari/537.36"
+    },
+    {
+      "action": "search",
+      "kb": "bench-1794066820315",
+      "precision": "q8",
+      "preference": "auto",
+      "device": "wasm",
+      "query": "lubricate bicycle chain",
+      "files": [
+        "cycling.md",
+        "bread.md",
+        "music.md",
+        "telescope.md",
+        "network.md"
+      ],
+      "loadMs": 0,
+      "embeddingMs": 16.599999994039536,
+      "searchMs": 10.97759999986738,
+      "endToEndMs": 32,
+      "at": "2026-11-07T16:00:20.377Z",
+      "model": "Xenova/all-MiniLM-L6-v2",
+      "revision": "751bff3",
+      "browser": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/156.0.0.0 Safari/537.36"
+    },
+    {
+      "action": "search",
+      "kb": "bench-1794066820315",
+      "precision": "q8",
+      "preference": "auto",
+      "device": "wasm",
+      "query": "practice steady tempo",
+      "files": [
+        "music.md",
+        "cycling.md",
+        "bread.md",
+        "database.md",
+        "battery.md"
+      ],
+      "loadMs": 0,
+      "embeddingMs": 18.799999982118607,
+      "searchMs": 23.18390000006184,
+      "endToEndMs": 49.5,
+      "at": "2026-11-07T16:00:20.632Z",
+      "model": "Xenova/all-MiniLM-L6-v2",
+      "revision": "751bff3",
+      "browser": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/156.0.0.0 Safari/537.36"
+    },
+    {
+      "action": "import",
+      "kb": "bench-1794066820315",
+      "precision": "fp32",
+      "preference": "auto",
+      "device": "wasm",
+      "batchSize": 4,
+      "rows": 8,
+      "loadMs": 524624.5,
+      "embeddingMs": 281,
+      "writeMs": 553.4558000001125,
+      "refreshMs": 259.0737000000663,
+      "at": "2026-11-07T16:09:07.044Z",
+      "model": "Xenova/all-MiniLM-L6-v2",
+      "revision": "751bff3",
+      "browser": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/156.0.0.0 Safari/537.36"
+    },
+    {
+      "action": "import",
+      "kb": "bench-1794066820315",
+      "precision": "fp32",
+      "preference": "auto",
+      "device": "wasm",
+      "batchSize": 1,
+      "rows": 8,
+      "loadMs": 0,
+      "embeddingMs": 291.09999999403954,
+      "writeMs": 651.6366000003181,
+      "refreshMs": 320.04689999995753,
+      "at": "2026-11-07T16:09:08.486Z",
+      "model": "Xenova/all-MiniLM-L6-v2",
+      "revision": "751bff3",
+      "browser": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/156.0.0.0 Safari/537.36"
+    },
+    {
+      "action": "import",
+      "kb": "bench-1794066820315",
+      "precision": "fp32",
+      "preference": "auto",
+      "device": "wasm",
+      "batchSize": 4,
+      "rows": 8,
+      "loadMs": 0,
+      "embeddingMs": 298.39999997615814,
+      "writeMs": 448.42130000004545,
+      "refreshMs": 434.30340000009164,
+      "at": "2026-11-07T16:09:09.752Z",
+      "model": "Xenova/all-MiniLM-L6-v2",
+      "revision": "751bff3",
+      "browser": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/156.0.0.0 Safari/537.36"
+    },
+    {
+      "action": "import",
+      "kb": "bench-1794066820315",
+      "precision": "fp32",
+      "preference": "auto",
+      "device": "wasm",
+      "batchSize": 4,
+      "rows": 8,
+      "loadMs": 0,
+      "embeddingMs": 243.09999999403954,
+      "writeMs": 46.211899999994785,
+      "refreshMs": 328.6929999999702,
+      "at": "2026-11-07T16:09:10.532Z",
+      "model": "Xenova/all-MiniLM-L6-v2",
+      "revision": "751bff3",
+      "browser": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/156.0.0.0 Safari/537.36"
+    },
+    {
+      "action": "import",
+      "kb": "bench-1794066820315",
+      "precision": "fp32",
+      "preference": "auto",
+      "device": "wasm",
+      "batchSize": 1,
+      "rows": 8,
+      "loadMs": 0,
+      "embeddingMs": 290.10000002384186,
+      "writeMs": 54.03260000003502,
+      "refreshMs": 430.15119999973103,
+      "at": "2026-11-07T16:09:11.357Z",
+      "model": "Xenova/all-MiniLM-L6-v2",
+      "revision": "751bff3",
+      "browser": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/156.0.0.0 Safari/537.36"
+    },
+    {
+      "action": "import",
+      "kb": "bench-1794066820315",
+      "precision": "fp32",
+      "preference": "auto",
+      "device": "wasm",
+      "batchSize": 1,
+      "rows": 8,
+      "loadMs": 0,
+      "embeddingMs": 302.5,
+      "writeMs": 46.09750000014901,
+      "refreshMs": 327.25840000016615,
+      "at": "2026-11-07T16:09:12.185Z",
+      "model": "Xenova/all-MiniLM-L6-v2",
+      "revision": "751bff3",
+      "browser": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/156.0.0.0 Safari/537.36"
+    },
+    {
+      "action": "import",
+      "kb": "bench-1794066820315",
+      "precision": "fp32",
+      "preference": "auto",
+      "device": "wasm",
+      "batchSize": 4,
+      "rows": 8,
+      "loadMs": 0,
+      "embeddingMs": 328.40000000596046,
+      "writeMs": 42.97259999997914,
+      "refreshMs": 431.6964000002481,
+      "at": "2026-11-07T16:09:13.040Z",
+      "model": "Xenova/all-MiniLM-L6-v2",
+      "revision": "751bff3",
+      "browser": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/156.0.0.0 Safari/537.36"
+    },
+    {
+      "action": "search",
+      "kb": "bench-1794066820315",
+      "precision": "fp32",
+      "preference": "auto",
+      "device": "wasm",
+      "query": "battery charge limit",
+      "files": [
+        "battery.md",
+        "plants.md",
+        "database.md",
+        "network.md",
+        "cycling.md"
+      ],
+      "loadMs": 0,
+      "embeddingMs": 25.30000001192093,
+      "searchMs": 68.59889999963343,
+      "endToEndMs": 102.59999999403954,
+      "at": "2026-11-07T16:09:13.295Z",
+      "model": "Xenova/all-MiniLM-L6-v2",
+      "revision": "751bff3",
+      "browser": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/156.0.0.0 Safari/537.36"
+    },
+    {
+      "action": "search",
+      "kb": "bench-1794066820315",
+      "precision": "fp32",
+      "preference": "auto",
+      "device": "wasm",
+      "query": "overnight sourdough fermentation",
+      "files": [
+        "bread.md",
+        "cycling.md",
+        "telescope.md",
+        "plants.md",
+        "music.md"
+      ],
+      "loadMs": 0,
+      "embeddingMs": 26.19999998807907,
+      "searchMs": 9.346899999771267,
+      "endToEndMs": 39.39999997615814,
+      "at": "2026-11-07T16:09:13.483Z",
+      "model": "Xenova/all-MiniLM-L6-v2",
+      "revision": "751bff3",
+      "browser": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/156.0.0.0 Safari/537.36"
+    },
+    {
+      "action": "search",
+      "kb": "bench-1794066820315",
+      "precision": "fp32",
+      "preference": "auto",
+      "device": "wasm",
+      "query": "keyword and semantic retrieval",
+      "files": [
+        "database.md",
+        "plants.md",
+        "bread.md",
+        "cycling.md",
+        "music.md"
+      ],
+      "loadMs": 0,
+      "embeddingMs": 21.30000001192093,
+      "searchMs": 11.317399999592453,
+      "endToEndMs": 36.900000005960464,
+      "at": "2026-11-07T16:09:13.725Z",
+      "model": "Xenova/all-MiniLM-L6-v2",
+      "revision": "751bff3",
+      "browser": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/156.0.0.0 Safari/537.36"
+    },
+    {
+      "action": "search",
+      "kb": "bench-1794066820315",
+      "precision": "fp32",
+      "preference": "auto",
+      "device": "wasm",
+      "query": "wireless router channel",
+      "files": [
+        "network.md",
+        "bread.md",
+        "telescope.md",
+        "cycling.md",
+        "battery.md"
+      ],
+      "loadMs": 0,
+      "embeddingMs": 21.400000005960464,
+      "searchMs": 16.475699999835342,
+      "endToEndMs": 45,
+      "at": "2026-11-07T16:09:13.969Z",
+      "model": "Xenova/all-MiniLM-L6-v2",
+      "revision": "751bff3",
+      "browser": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/156.0.0.0 Safari/537.36"
+    },
+    {
+      "action": "search",
+      "kb": "bench-1794066820315",
+      "precision": "fp32",
+      "preference": "auto",
+      "device": "wasm",
+      "query": "observe distant galaxies",
+      "files": [
+        "telescope.md",
+        "network.md",
+        "plants.md",
+        "database.md",
+        "bread.md"
+      ],
+      "loadMs": 0,
+      "embeddingMs": 24,
+      "searchMs": 14.755200000014156,
+      "endToEndMs": 45.69999998807907,
+      "at": "2026-11-07T16:09:14.226Z",
+      "model": "Xenova/all-MiniLM-L6-v2",
+      "revision": "751bff3",
+      "browser": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/156.0.0.0 Safari/537.36"
+    },
+    {
+      "action": "search",
+      "kb": "bench-1794066820315",
+      "precision": "fp32",
+      "preference": "auto",
+      "device": "wasm",
+      "query": "chlorophyll sunlight",
+      "files": [
+        "plants.md",
+        "telescope.md",
+        "music.md",
+        "database.md",
+        "bread.md"
+      ],
+      "loadMs": 0,
+      "embeddingMs": 29.799999982118607,
+      "searchMs": 16.60730000026524,
+      "endToEndMs": 52.5,
+      "at": "2026-11-07T16:09:14.475Z",
+      "model": "Xenova/all-MiniLM-L6-v2",
+      "revision": "751bff3",
+      "browser": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/156.0.0.0 Safari/537.36"
+    },
+    {
+      "action": "search",
+      "kb": "bench-1794066820315",
+      "precision": "fp32",
+      "preference": "auto",
+      "device": "wasm",
+      "query": "lubricate bicycle chain",
+      "files": [
+        "cycling.md",
+        "bread.md",
+        "music.md",
+        "telescope.md",
+        "network.md"
+      ],
+      "loadMs": 0,
+      "embeddingMs": 32.10000002384186,
+      "searchMs": 15.796000000089407,
+      "endToEndMs": 55.900000005960464,
+      "at": "2026-11-07T16:09:14.727Z",
+      "model": "Xenova/all-MiniLM-L6-v2",
+      "revision": "751bff3",
+      "browser": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/156.0.0.0 Safari/537.36"
+    },
+    {
+      "action": "search",
+      "kb": "bench-1794066820315",
+      "precision": "fp32",
+      "preference": "auto",
+      "device": "wasm",
+      "query": "practice steady tempo",
+      "files": [
+        "music.md",
+        "cycling.md",
+        "bread.md",
+        "database.md",
+        "battery.md"
+      ],
+      "loadMs": 0,
+      "embeddingMs": 16.69999998807907,
+      "searchMs": 9.304599999915808,
+      "endToEndMs": 29.799999982118607,
+      "at": "2026-11-07T16:09:14.948Z",
+      "model": "Xenova/all-MiniLM-L6-v2",
+      "revision": "751bff3",
+      "browser": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/156.0.0.0 Safari/537.36"
+    },
+    {
+      "action": "search",
+      "kb": "bench-1794066820315",
+      "precision": "fp32",
+      "preference": "auto",
+      "device": "wasm",
+      "query": "battery charge limit",
+      "files": [
+        "battery.md",
+        "plants.md",
+        "database.md",
+        "network.md",
+        "cycling.md"
+      ],
+      "loadMs": 0,
+      "embeddingMs": 23.299999982118607,
+      "searchMs": 12.218499999959022,
+      "endToEndMs": 41.80000001192093,
+      "at": "2026-11-07T16:09:15.198Z",
+      "model": "Xenova/all-MiniLM-L6-v2",
+      "revision": "751bff3",
+      "browser": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/156.0.0.0 Safari/537.36"
+    },
+    {
+      "action": "search",
+      "kb": "bench-1794066820315",
+      "precision": "fp32",
+      "preference": "auto",
+      "device": "wasm",
+      "query": "overnight sourdough fermentation",
+      "files": [
+        "bread.md",
+        "cycling.md",
+        "telescope.md",
+        "plants.md",
+        "music.md"
+      ],
+      "loadMs": 0,
+      "embeddingMs": 33.69999998807907,
+      "searchMs": 17.267200000118464,
+      "endToEndMs": 57.599999994039536,
+      "at": "2026-11-07T16:09:15.456Z",
+      "model": "Xenova/all-MiniLM-L6-v2",
+      "revision": "751bff3",
+      "browser": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/156.0.0.0 Safari/537.36"
+    },
+    {
+      "action": "search",
+      "kb": "bench-1794066820315",
+      "precision": "fp32",
+      "preference": "auto",
+      "device": "wasm",
+      "query": "keyword and semantic retrieval",
+      "files": [
+        "database.md",
+        "plants.md",
+        "bread.md",
+        "cycling.md",
+        "music.md"
+      ],
+      "loadMs": 0,
+      "embeddingMs": 28.100000023841858,
+      "searchMs": 12.399500000290573,
+      "endToEndMs": 45.80000001192093,
+      "at": "2026-11-07T16:09:15.707Z",
+      "model": "Xenova/all-MiniLM-L6-v2",
+      "revision": "751bff3",
+      "browser": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/156.0.0.0 Safari/537.36"
+    },
+    {
+      "action": "search",
+      "kb": "bench-1794066820315",
+      "precision": "fp32",
+      "preference": "auto",
+      "device": "wasm",
+      "query": "wireless router channel",
+      "files": [
+        "network.md",
+        "bread.md",
+        "telescope.md",
+        "cycling.md",
+        "battery.md"
+      ],
+      "loadMs": 0,
+      "embeddingMs": 24.69999998807907,
+      "searchMs": 15.79190000006929,
+      "endToEndMs": 47.599999994039536,
+      "at": "2026-11-07T16:09:15.954Z",
+      "model": "Xenova/all-MiniLM-L6-v2",
+      "revision": "751bff3",
+      "browser": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/156.0.0.0 Safari/537.36"
+    },
+    {
+      "action": "search",
+      "kb": "bench-1794066820315",
+      "precision": "fp32",
+      "preference": "auto",
+      "device": "wasm",
+      "query": "observe distant galaxies",
+      "files": [
+        "telescope.md",
+        "network.md",
+        "plants.md",
+        "database.md",
+        "bread.md"
+      ],
+      "loadMs": 0,
+      "embeddingMs": 24.099999994039536,
+      "searchMs": 15.46169999986887,
+      "endToEndMs": 47.099999994039536,
+      "at": "2026-11-07T16:09:16.199Z",
+      "model": "Xenova/all-MiniLM-L6-v2",
+      "revision": "751bff3",
+      "browser": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/156.0.0.0 Safari/537.36"
+    },
+    {
+      "action": "search",
+      "kb": "bench-1794066820315",
+      "precision": "fp32",
+      "preference": "auto",
+      "device": "wasm",
+      "query": "chlorophyll sunlight",
+      "files": [
+        "plants.md",
+        "telescope.md",
+        "music.md",
+        "database.md",
+        "bread.md"
+      ],
+      "loadMs": 0,
+      "embeddingMs": 28.80000001192093,
+      "searchMs": 16.296500000171363,
+      "endToEndMs": 51.5,
+      "at": "2026-11-07T16:09:16.455Z",
+      "model": "Xenova/all-MiniLM-L6-v2",
+      "revision": "751bff3",
+      "browser": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/156.0.0.0 Safari/537.36"
+    },
+    {
+      "action": "search",
+      "kb": "bench-1794066820315",
+      "precision": "fp32",
+      "preference": "auto",
+      "device": "wasm",
+      "query": "lubricate bicycle chain",
+      "files": [
+        "cycling.md",
+        "bread.md",
+        "music.md",
+        "telescope.md",
+        "network.md"
+      ],
+      "loadMs": 0,
+      "embeddingMs": 28.700000017881393,
+      "searchMs": 17.232499999925494,
+      "endToEndMs": 52.599999994039536,
+      "at": "2026-11-07T16:09:16.703Z",
+      "model": "Xenova/all-MiniLM-L6-v2",
+      "revision": "751bff3",
+      "browser": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/156.0.0.0 Safari/537.36"
+    },
+    {
+      "action": "search",
+      "kb": "bench-1794066820315",
+      "precision": "fp32",
+      "preference": "auto",
+      "device": "wasm",
+      "query": "practice steady tempo",
+      "files": [
+        "music.md",
+        "cycling.md",
+        "bread.md",
+        "database.md",
+        "battery.md"
+      ],
+      "loadMs": 0,
+      "embeddingMs": 23.400000005960464,
+      "searchMs": 14.523999999742955,
+      "endToEndMs": 44,
+      "at": "2026-11-07T16:09:16.941Z",
+      "model": "Xenova/all-MiniLM-L6-v2",
+      "revision": "751bff3",
+      "browser": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/156.0.0.0 Safari/537.36"
+    },
+    {
+      "action": "search",
+      "kb": "bench-1794066820315",
+      "precision": "fp32",
+      "preference": "auto",
+      "device": "wasm",
+      "query": "battery charge limit",
+      "files": [
+        "battery.md",
+        "plants.md",
+        "database.md",
+        "network.md",
+        "cycling.md"
+      ],
+      "loadMs": 0,
+      "embeddingMs": 24.69999998807907,
+      "searchMs": 13.938500000163913,
+      "endToEndMs": 46,
+      "at": "2026-11-07T16:09:17.192Z",
+      "model": "Xenova/all-MiniLM-L6-v2",
+      "revision": "751bff3",
+      "browser": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/156.0.0.0 Safari/537.36"
+    },
+    {
+      "action": "search",
+      "kb": "bench-1794066820315",
+      "precision": "fp32",
+      "preference": "auto",
+      "device": "wasm",
+      "query": "overnight sourdough fermentation",
+      "files": [
+        "bread.md",
+        "cycling.md",
+        "telescope.md",
+        "plants.md",
+        "music.md"
+      ],
+      "loadMs": 0,
+      "embeddingMs": 31.599999994039536,
+      "searchMs": 15.701799999922514,
+      "endToEndMs": 54.39999997615814,
+      "at": "2026-11-07T16:09:17.446Z",
+      "model": "Xenova/all-MiniLM-L6-v2",
+      "revision": "751bff3",
+      "browser": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/156.0.0.0 Safari/537.36"
+    },
+    {
+      "action": "search",
+      "kb": "bench-1794066820315",
+      "precision": "fp32",
+      "preference": "auto",
+      "device": "wasm",
+      "query": "keyword and semantic retrieval",
+      "files": [
+        "database.md",
+        "plants.md",
+        "bread.md",
+        "cycling.md",
+        "music.md"
+      ],
+      "loadMs": 0,
+      "embeddingMs": 27.899999976158142,
+      "searchMs": 12.739000000059605,
+      "endToEndMs": 53.30000001192093,
+      "at": "2026-11-07T16:09:17.692Z",
+      "model": "Xenova/all-MiniLM-L6-v2",
+      "revision": "751bff3",
+      "browser": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/156.0.0.0 Safari/537.36"
+    },
+    {
+      "action": "search",
+      "kb": "bench-1794066820315",
+      "precision": "fp32",
+      "preference": "auto",
+      "device": "wasm",
+      "query": "wireless router channel",
+      "files": [
+        "network.md",
+        "bread.md",
+        "telescope.md",
+        "cycling.md",
+        "battery.md"
+      ],
+      "loadMs": 0,
+      "embeddingMs": 25.5,
+      "searchMs": 12.683599999640137,
+      "endToEndMs": 43,
+      "at": "2026-11-07T16:09:17.931Z",
+      "model": "Xenova/all-MiniLM-L6-v2",
+      "revision": "751bff3",
+      "browser": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/156.0.0.0 Safari/537.36"
+    },
+    {
+      "action": "search",
+      "kb": "bench-1794066820315",
+      "precision": "fp32",
+      "preference": "auto",
+      "device": "wasm",
+      "query": "observe distant galaxies",
+      "files": [
+        "telescope.md",
+        "network.md",
+        "plants.md",
+        "database.md",
+        "bread.md"
+      ],
+      "loadMs": 0,
+      "embeddingMs": 12.900000005960464,
+      "searchMs": 8.328600000124425,
+      "endToEndMs": 26,
+      "at": "2026-11-07T16:09:18.158Z",
+      "model": "Xenova/all-MiniLM-L6-v2",
+      "revision": "751bff3",
+      "browser": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/156.0.0.0 Safari/537.36"
+    },
+    {
+      "action": "search",
+      "kb": "bench-1794066820315",
+      "precision": "fp32",
+      "preference": "auto",
+      "device": "wasm",
+      "query": "chlorophyll sunlight",
+      "files": [
+        "plants.md",
+        "telescope.md",
+        "music.md",
+        "database.md",
+        "bread.md"
+      ],
+      "loadMs": 0,
+      "embeddingMs": 28.30000001192093,
+      "searchMs": 11.852299999911338,
+      "endToEndMs": 44.60000002384186,
+      "at": "2026-11-07T16:09:18.416Z",
+      "model": "Xenova/all-MiniLM-L6-v2",
+      "revision": "751bff3",
+      "browser": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/156.0.0.0 Safari/537.36"
+    },
+    {
+      "action": "search",
+      "kb": "bench-1794066820315",
+      "precision": "fp32",
+      "preference": "auto",
+      "device": "wasm",
+      "query": "lubricate bicycle chain",
+      "files": [
+        "cycling.md",
+        "bread.md",
+        "music.md",
+        "telescope.md",
+        "network.md"
+      ],
+      "loadMs": 0,
+      "embeddingMs": 27.80000001192093,
+      "searchMs": 16.53940000012517,
+      "endToEndMs": 50.099999994039536,
+      "at": "2026-11-07T16:09:18.667Z",
+      "model": "Xenova/all-MiniLM-L6-v2",
+      "revision": "751bff3",
+      "browser": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/156.0.0.0 Safari/537.36"
+    },
+    {
+      "action": "search",
+      "kb": "bench-1794066820315",
+      "precision": "fp32",
+      "preference": "auto",
+      "device": "wasm",
+      "query": "practice steady tempo",
+      "files": [
+        "music.md",
+        "cycling.md",
+        "bread.md",
+        "database.md",
+        "battery.md"
+      ],
+      "loadMs": 0,
+      "embeddingMs": 21.099999994039536,
+      "searchMs": 21.91149999992922,
+      "endToEndMs": 49.70000001788139,
+      "at": "2026-11-07T16:09:18.914Z",
+      "model": "Xenova/all-MiniLM-L6-v2",
+      "revision": "751bff3",
+      "browser": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/156.0.0.0 Safari/537.36"
+    },
+    {
+      "action": "import",
+      "kb": "bench-1794066820315",
+      "precision": "q8",
+      "preference": "auto",
+      "device": "wasm",
+      "batchSize": 4,
+      "rows": 1,
+      "loadMs": 304.2000000178814,
+      "embeddingMs": 21.700000017881393,
+      "writeMs": 52.51179999997839,
+      "refreshMs": 441.99729999992996,
+      "at": "2026-11-07T16:09:19.981Z",
+      "model": "Xenova/all-MiniLM-L6-v2",
+      "revision": "751bff3",
+      "browser": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/156.0.0.0 Safari/537.36"
+    },
+    {
+      "action": "search",
+      "kb": "bench-1794066820315",
+      "precision": "q8",
+      "preference": "auto",
+      "device": "wasm",
+      "query": "meteorite nickel iron",
+      "files": [
+        "meteorite.md",
+        "music.md",
+        "database.md",
+        "plants.md",
+        "telescope.md"
+      ],
+      "loadMs": 0,
+      "embeddingMs": 20.099999994039536,
+      "searchMs": 54.18430000031367,
+      "endToEndMs": 80.90000000596046,
+      "at": "2026-11-07T16:09:20.169Z",
+      "model": "Xenova/all-MiniLM-L6-v2",
+      "revision": "751bff3",
+      "browser": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/156.0.0.0 Safari/537.36"
+    },
+    {
+      "action": "import",
+      "kb": "bench-1794066820315-isolated",
+      "precision": "q8",
+      "preference": "auto",
+      "device": "wasm",
+      "batchSize": 4,
+      "rows": 1,
+      "loadMs": 0,
+      "embeddingMs": 35.5,
+      "writeMs": 103.65110000036657,
+      "refreshMs": 435.25979999965057,
+      "at": "2026-11-07T16:09:21.054Z",
+      "model": "Xenova/all-MiniLM-L6-v2",
+      "revision": "751bff3",
+      "browser": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/156.0.0.0 Safari/537.36"
+    },
+    {
+      "action": "search",
+      "kb": "bench-1794066820315-isolated",
+      "precision": "q8",
+      "preference": "auto",
+      "device": "wasm",
+      "query": "meteorite nickel iron",
+      "files": [
+        "other.md"
+      ],
+      "loadMs": 0,
+      "embeddingMs": 20.299999982118607,
+      "searchMs": 40.282599999569356,
+      "endToEndMs": 79,
+      "at": "2026-11-07T16:09:21.292Z",
+      "model": "Xenova/all-MiniLM-L6-v2",
+      "revision": "751bff3",
+      "browser": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/156.0.0.0 Safari/537.36"
+    },
+    {
+      "action": "search",
+      "kb": "bench-1794066820315",
+      "precision": "q8",
+      "preference": "auto",
+      "device": "wasm",
+      "query": "meteorite nickel iron",
+      "files": [
+        "meteorite.md",
+        "music.md",
+        "database.md",
+        "plants.md",
+        "telescope.md"
+      ],
+      "loadMs": 0,
+      "embeddingMs": 20.100000023841858,
+      "searchMs": 22.24390000011772,
+      "endToEndMs": 48.099999994039536,
+      "at": "2026-11-07T16:09:21.498Z",
+      "model": "Xenova/all-MiniLM-L6-v2",
+      "revision": "751bff3",
+      "browser": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/156.0.0.0 Safari/537.36"
+    }
+  ]
+}

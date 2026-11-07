@@ -1,0 +1,41 @@
+<!doctype html>
+<html lang="zh-CN">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>阶跃星辰 · 本地知识库</title>
+<style>
+  body { font: 16px/1.6 system-ui; margin: 3rem auto; padding: 0 1rem; max-width: 52rem; color: #182337; background: #f4f7fb; }
+  section, article { background: white; margin: 1rem 0; padding: 1rem; border-radius: .8rem; }
+  label { display: inline-block; margin-right: 1rem; }
+  button, input, select { font: inherit; margin: .3rem; }
+  button { cursor: pointer; }
+  small, #timings { color: #46577a; }
+  #status { white-space: pre-wrap; }
+</style>
+<main>
+  <h1>浏览器本地知识库</h1>
+  <p>浏览器生成文档和查询向量，seekdb 保存原文并执行混合检索。</p>
+  <section>
+    <label>知识库 <input id="kb" value="demo" maxlength="64"></label>
+    <label>精度 <select id="precision"><option value="q8">INT8</option><option value="fp32">FP32 基线</option></select></label>
+    <label>推理 <select id="device"><option value="auto">WebGPU 优先</option><option value="wasm">强制 WASM</option></select></label>
+    <label>批大小 <select id="batch"><option>4</option><option>1</option><option>8</option></select></label>
+    <p>实际后端 <strong id="backend">尚未加载</strong></p>
+  </section>
+  <section>
+    <label>导入资料 <input type="file" id="files" accept=".txt,.md" multiple></label>
+    <button id="import">导入文件</button><button id="demo">导入示例</button>
+  </section>
+  <section>
+    <form id="search">
+      <label>查询 <input id="query" placeholder="battery charge limit" maxlength="512" required></label>
+      <button>混合检索</button>
+    </form>
+    <p id="status" role="status"></p>
+    <p id="timings"></p>
+    <button id="download">导出本次计时 JSON</button>
+    <div id="results"></div>
+  </section>
+</main>
+<script type="module" src="/src/main.js"></script>
+</html>

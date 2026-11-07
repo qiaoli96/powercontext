@@ -1,0 +1,11 @@
+{
+  "name": "stepfun-browser-knowledge-base",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "scripts": { "start": "vite --host 127.0.0.1" },
+  "dependencies": {
+    "seekdb": "1.4.0",
+    "vite": "6.4.5"
+  }
+}

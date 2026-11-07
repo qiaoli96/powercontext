@@ -1,0 +1,46 @@
+{
+  "files": [
+    {
+      "url": "https://huggingface.co/Xenova/all-MiniLM-L6-v2/resolve/main/config.json",
+      "bytes": 650
+    },
+    {
+      "url": "https://huggingface.co/Xenova/all-MiniLM-L6-v2/resolve/751bff3/tokenizer_config.json",
+      "bytes": 366
+    },
+    {
+      "url": "https://huggingface.co/Xenova/all-MiniLM-L6-v2/resolve/751bff3/config.json",
+      "bytes": 650
+    },
+    {
+      "url": "https://huggingface.co/Xenova/all-MiniLM-L6-v2/resolve/751bff3/tokenizer.json",
+      "bytes": 711661
+    },
+    {
+      "url": "https://huggingface.co/Xenova/all-MiniLM-L6-v2/resolve/751bff3/onnx/model_quantized.onnx",
+      "bytes": 22972370
+    },
+    {
+      "url": "https://huggingface.co/Xenova/all-MiniLM-L6-v2/resolve/751bff3/onnx/model.onnx",
+      "bytes": 90387606
+    }
+  ],
+  "resources": [
+    {
+      "url": "https://huggingface.co/Xenova/all-MiniLM-L6-v2/resolve/main/onnx/model_quantized.onnx",
+      "durationMs": 3478.300000011921
+    },
+    {
+      "url": "https://huggingface.co/Xenova/all-MiniLM-L6-v2/resolve/751bff3/onnx/model_quantized.onnx",
+      "durationMs": 232876.5
+    },
+    {
+      "url": "https://huggingface.co/Xenova/all-MiniLM-L6-v2/resolve/main/onnx/model.onnx",
+      "durationMs": 3225.4000000059605
+    },
+    {
+      "url": "https://huggingface.co/Xenova/all-MiniLM-L6-v2/resolve/751bff3/onnx/model.onnx",
+      "durationMs": 520533.59999999404
+    }
+  ]
+}
