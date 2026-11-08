@@ -1,0 +1,11 @@
+Dify console API ready
+Local administrator authenticated
+Chatflow imported
+Chatflow published
+{"command": "承诺", "conversation_id": "69e9dcf5-1175-4e57-bd69-312f24825462", "answer": "管理员把你的承诺抄进登记簿：**先调查来历，绝不冒领**。下次回来输入「调查」，我会把柜台后的记录交给你。\n\n可用指令：查看、承诺、调查、回答蓝伞、回答红伞。"}
+{"command": "查看", "conversation_id": "e6af1fa6-0203-46d6-b8a7-968309c8f4ff", "answer": "管理员认出了你的存档，记得你答应先调查来历。输入「调查」，就能翻开登记簿。\n\n可用指令：查看、承诺、调查、回答蓝伞、回答红伞。"}
+{"command": "调查", "conversation_id": "e6af1fa6-0203-46d6-b8a7-968309c8f4ff", "answer": "管理员翻出你的旧承诺，递给你一张纸条：**失主说，雨伞与晴天的天空同色。** 请选择「回答蓝伞」或「回答红伞」。\n\n可用指令：查看、承诺、调查、回答蓝伞、回答红伞。"}
+{"command": "回答红伞", "conversation_id": "e6af1fa6-0203-46d6-b8a7-968309c8f4ff", "answer": "红伞的把手没有失主的名字。管理员请你再想想：晴天的天空是什么颜色？\n\n可用指令：查看、承诺、调查、回答蓝伞、回答红伞。"}
+{"command": "回答蓝伞", "conversation_id": "e6af1fa6-0203-46d6-b8a7-968309c8f4ff", "answer": "蓝伞的把手刻着失主的名字。归还成功，你获得了「雨夜守约人」徽章。\n\n可用指令：查看、承诺、调查、回答蓝伞、回答红伞。"}
+{"command": "调查", "conversation_id": "d83870fb-1070-4314-afd6-1c2de0e106cb", "answer": "今晚柜台上有一红一蓝两把伞。管理员压住登记簿说：先答应「承诺」，我才把调查记录交给你。\n\n可用指令：查看、承诺、调查、回答蓝伞、回答红伞。"}
+PASS: Dify API, separate conversations, remembered promise, puzzle and save isolation.

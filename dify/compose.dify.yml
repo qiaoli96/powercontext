@@ -1,0 +1,16 @@
+services:
+  ssrf_proxy:
+    volumes:
+      - ${LOST_FOUND_DIR:?set LOST_FOUND_DIR}/squid-lost-found.conf:/etc/squid/conf.d/90-lost-found.conf:ro
+  lost-found-memory:
+    build:
+      context: ${LOST_FOUND_DIR:?set LOST_FOUND_DIR to the absolute path of the dify challenge directory}
+    environment:
+      GAME_API_TOKEN: ${GAME_API_TOKEN:?set GAME_API_TOKEN}
+    networks:
+      - ssrf_proxy_network
+    volumes:
+      - lost_found_data:/data
+
+volumes:
+  lost_found_data:

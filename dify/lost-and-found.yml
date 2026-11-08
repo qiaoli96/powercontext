@@ -1,0 +1,380 @@
+kind: app
+version: 0.3.0
+dependencies: []
+app:
+  name: 失物招领事务所
+  mode: advanced-chat
+  icon: ☂️
+  icon_background: '#E0F2FE'
+  description: 会记住你承诺的雨夜调查游戏
+  use_icon_as_answer_icon: false
+workflow:
+  conversation_variables: []
+  environment_variables:
+  - id: 1d50359d-05cc-42fb-a596-324d232b898d
+    name: GAME_API_URL
+    value: http://lost-found-memory:8787
+    value_type: string
+    description: 存档服务地址
+  - id: e19c0c8b-17ce-4a61-8059-f35b83a93077
+    name: GAME_API_TOKEN
+    value: ''
+    value_type: secret
+    description: 与存档服务一致的令牌
+  features:
+    opening_statement: 雨夜的失物招领事务所还亮着灯。发「A7K9 查看」开始。下次开新对话时，用同一个存档码继续。
+    suggested_questions:
+    - A7K9 查看
+    - A7K9 承诺
+    suggested_questions_after_answer:
+      enabled: false
+    speech_to_text:
+      enabled: false
+    text_to_speech:
+      enabled: false
+    retriever_resource:
+      enabled: false
+    sensitive_word_avoidance:
+      enabled: false
+    file_upload:
+      enabled: false
+      image:
+        enabled: false
+  graph:
+    nodes:
+    - id: '100'
+      type: custom
+      data:
+        desc: ''
+        selected: false
+        type: start
+        title: 玩家输入
+        variables: []
+      position: &id001
+        x: 70
+        y: 200
+      positionAbsolute: *id001
+      height: 58
+      width: 244
+      sourcePosition: right
+      targetPosition: left
+      selected: false
+    - id: '110'
+      type: custom
+      data:
+        desc: ''
+        selected: false
+        type: code
+        title: 解析存档码和指令
+        code_language: python3
+        code: "\"\"\"Pure dialogue rules. The DSL embeds these functions in Dify Code nodes.\"\"\"\n\nimport json\nimport\
+          \ re\n\n\nUSAGE = \"每轮输入「存档码 指令」，例如 `A7K9 查看`。存档码为 4–32 位英文字母或数字。\"\nMENU = \"可用指令：查看、承诺、调查、回答蓝伞、回答红伞。\"\n\n\ndef\
+          \ parse_input(query):\n    match = re.fullmatch(r\"([A-Za-z0-9]{4,32})\\s+(.{1,60})\", query.strip())\n    code,\
+          \ action = (match[1].upper(), match[2].strip()) if match else (\"\", \"\")\n    return {\"body\": json.dumps({\"\
+          op\": \"read\", \"code\": code}), \"save_code\": code, \"action\": action}\n\n\ndef choose(stage, action):\n   \
+          \ if stage == 0:\n        if action == \"承诺\":\n            return 1, \"管理员把你的承诺抄进登记簿：**先调查来历，绝不冒领**。下次回来输入「调查」，我会把柜台后的记录交给你。\"\
+          \n        return 0, \"今晚柜台上有一红一蓝两把伞。管理员压住登记簿说：先答应「承诺」，我才把调查记录交给你。\"\n    if stage == 1:\n        if action == \"\
+          调查\":\n            return 2, \"管理员翻出你的旧承诺，递给你一张纸条：**失主说，雨伞与晴天的天空同色。** 请选择「回答蓝伞」或「回答红伞」。\"\n        return 1, \"\
+          管理员认出了你的存档，记得你答应先调查来历。输入「调查」，就能翻开登记簿。\"\n    if stage == 2:\n        if action == \"回答蓝伞\":\n            return\
+          \ 3, \"蓝伞的把手刻着失主的名字。归还成功，你获得了「雨夜守约人」徽章。\"\n        if action == \"回答红伞\":\n            return 2, \"红伞的把手没有失主的名字。管理员请你再想想：晴天的天空是什么颜色？\"\
+          \n        return 2, \"线索仍在：失主说雨伞与晴天的天空同色。请选择「回答蓝伞」或「回答红伞」。\"\n    return 3, \"登记簿记着你已经归还蓝伞，并获得「雨夜守约人」徽章。换一个新存档码可以重新调查。\"\
+          \n\n\ndef plan_turn(body, save_code, action):\n    request = {\"op\": \"check\", \"code\": save_code}\n    if not\
+          \ save_code:\n        return {\"body\": json.dumps(request), \"reply\": USAGE}\n    state = json.loads(body)\n \
+          \   if not state.get(\"ok\"):\n        return {\"body\": json.dumps(request), \"reply\": \"登记簿暂不可用，请稍后重试。\"}\n \
+          \   stage = state[\"stage\"]\n    next_stage, reply = choose(stage, action)\n    if next_stage != stage:\n     \
+          \   request.update(op=\"advance\", expected=stage, stage=next_stage)\n    return {\"body\": json.dumps(request),\
+          \ \"reply\": f\"{reply}\\n\\n{MENU}\"}\n\n\ndef finish_turn(body, reply):\n    if not json.loads(body).get(\"ok\"\
+          ):\n        return {\"reply\": \"登记簿没有保存本轮进度。请重试，或先用「查看」确认当前存档。\"}\n    return {\"reply\": reply}\n\n\ndef main(query):\n\
+          \    return parse_input(query)\n"
+        variables:
+        - variable: query
+          value_selector:
+          - sys
+          - query
+        outputs:
+          body:
+            type: string
+            children: null
+          save_code:
+            type: string
+            children: null
+          action:
+            type: string
+            children: null
+      position: &id002
+        x: 380
+        y: 200
+      positionAbsolute: *id002
+      height: 58
+      width: 244
+      sourcePosition: right
+      targetPosition: left
+      selected: false
+    - id: '120'
+      type: custom
+      data:
+        desc: ''
+        selected: false
+        type: http-request
+        title: 从 PowerContext 读取存档
+        method: post
+        url: '{{#env.GAME_API_URL#}}/memory'
+        authorization:
+          type: no-auth
+          config: null
+        headers: 'Authorization:Bearer {{#env.GAME_API_TOKEN#}}
+
+          Content-Type:application/json'
+        params: ''
+        body:
+          type: json
+          data:
+          - key: ''
+            type: text
+            value: '{{#110.body#}}'
+        timeout:
+          connect: 5
+          read: 30
+          write: 10
+        ssl_verify: true
+        retry_config:
+          retry_enabled: false
+          max_retries: 0
+          retry_interval: 100
+      position: &id003
+        x: 690
+        y: 200
+      positionAbsolute: *id003
+      height: 58
+      width: 244
+      sourcePosition: right
+      targetPosition: left
+      selected: false
+    - id: '130'
+      type: custom
+      data:
+        desc: ''
+        selected: false
+        type: code
+        title: 根据记忆决定剧情
+        code_language: python3
+        code: "\"\"\"Pure dialogue rules. The DSL embeds these functions in Dify Code nodes.\"\"\"\n\nimport json\nimport\
+          \ re\n\n\nUSAGE = \"每轮输入「存档码 指令」，例如 `A7K9 查看`。存档码为 4–32 位英文字母或数字。\"\nMENU = \"可用指令：查看、承诺、调查、回答蓝伞、回答红伞。\"\n\n\ndef\
+          \ parse_input(query):\n    match = re.fullmatch(r\"([A-Za-z0-9]{4,32})\\s+(.{1,60})\", query.strip())\n    code,\
+          \ action = (match[1].upper(), match[2].strip()) if match else (\"\", \"\")\n    return {\"body\": json.dumps({\"\
+          op\": \"read\", \"code\": code}), \"save_code\": code, \"action\": action}\n\n\ndef choose(stage, action):\n   \
+          \ if stage == 0:\n        if action == \"承诺\":\n            return 1, \"管理员把你的承诺抄进登记簿：**先调查来历，绝不冒领**。下次回来输入「调查」，我会把柜台后的记录交给你。\"\
+          \n        return 0, \"今晚柜台上有一红一蓝两把伞。管理员压住登记簿说：先答应「承诺」，我才把调查记录交给你。\"\n    if stage == 1:\n        if action == \"\
+          调查\":\n            return 2, \"管理员翻出你的旧承诺，递给你一张纸条：**失主说，雨伞与晴天的天空同色。** 请选择「回答蓝伞」或「回答红伞」。\"\n        return 1, \"\
+          管理员认出了你的存档，记得你答应先调查来历。输入「调查」，就能翻开登记簿。\"\n    if stage == 2:\n        if action == \"回答蓝伞\":\n            return\
+          \ 3, \"蓝伞的把手刻着失主的名字。归还成功，你获得了「雨夜守约人」徽章。\"\n        if action == \"回答红伞\":\n            return 2, \"红伞的把手没有失主的名字。管理员请你再想想：晴天的天空是什么颜色？\"\
+          \n        return 2, \"线索仍在：失主说雨伞与晴天的天空同色。请选择「回答蓝伞」或「回答红伞」。\"\n    return 3, \"登记簿记着你已经归还蓝伞，并获得「雨夜守约人」徽章。换一个新存档码可以重新调查。\"\
+          \n\n\ndef plan_turn(body, save_code, action):\n    request = {\"op\": \"check\", \"code\": save_code}\n    if not\
+          \ save_code:\n        return {\"body\": json.dumps(request), \"reply\": USAGE}\n    state = json.loads(body)\n \
+          \   if not state.get(\"ok\"):\n        return {\"body\": json.dumps(request), \"reply\": \"登记簿暂不可用，请稍后重试。\"}\n \
+          \   stage = state[\"stage\"]\n    next_stage, reply = choose(stage, action)\n    if next_stage != stage:\n     \
+          \   request.update(op=\"advance\", expected=stage, stage=next_stage)\n    return {\"body\": json.dumps(request),\
+          \ \"reply\": f\"{reply}\\n\\n{MENU}\"}\n\n\ndef finish_turn(body, reply):\n    if not json.loads(body).get(\"ok\"\
+          ):\n        return {\"reply\": \"登记簿没有保存本轮进度。请重试，或先用「查看」确认当前存档。\"}\n    return {\"reply\": reply}\n\n\ndef main(body,\
+          \ save_code, action):\n    return plan_turn(body, save_code, action)\n"
+        variables:
+        - variable: body
+          value_selector:
+          - '120'
+          - body
+        - variable: save_code
+          value_selector:
+          - '110'
+          - save_code
+        - variable: action
+          value_selector:
+          - '110'
+          - action
+        outputs:
+          body:
+            type: string
+            children: null
+          reply:
+            type: string
+            children: null
+      position: &id004
+        x: 1000
+        y: 200
+      positionAbsolute: *id004
+      height: 58
+      width: 244
+      sourcePosition: right
+      targetPosition: left
+      selected: false
+    - id: '140'
+      type: custom
+      data:
+        desc: ''
+        selected: false
+        type: http-request
+        title: 确认或保存进度
+        method: post
+        url: '{{#env.GAME_API_URL#}}/memory'
+        authorization:
+          type: no-auth
+          config: null
+        headers: 'Authorization:Bearer {{#env.GAME_API_TOKEN#}}
+
+          Content-Type:application/json'
+        params: ''
+        body:
+          type: json
+          data:
+          - key: ''
+            type: text
+            value: '{{#130.body#}}'
+        timeout:
+          connect: 5
+          read: 30
+          write: 10
+        ssl_verify: true
+        retry_config:
+          retry_enabled: false
+          max_retries: 0
+          retry_interval: 100
+      position: &id005
+        x: 1310
+        y: 200
+      positionAbsolute: *id005
+      height: 58
+      width: 244
+      sourcePosition: right
+      targetPosition: left
+      selected: false
+    - id: '150'
+      type: custom
+      data:
+        desc: ''
+        selected: false
+        type: code
+        title: 确认保存结果
+        code_language: python3
+        code: "\"\"\"Pure dialogue rules. The DSL embeds these functions in Dify Code nodes.\"\"\"\n\nimport json\nimport\
+          \ re\n\n\nUSAGE = \"每轮输入「存档码 指令」，例如 `A7K9 查看`。存档码为 4–32 位英文字母或数字。\"\nMENU = \"可用指令：查看、承诺、调查、回答蓝伞、回答红伞。\"\n\n\ndef\
+          \ parse_input(query):\n    match = re.fullmatch(r\"([A-Za-z0-9]{4,32})\\s+(.{1,60})\", query.strip())\n    code,\
+          \ action = (match[1].upper(), match[2].strip()) if match else (\"\", \"\")\n    return {\"body\": json.dumps({\"\
+          op\": \"read\", \"code\": code}), \"save_code\": code, \"action\": action}\n\n\ndef choose(stage, action):\n   \
+          \ if stage == 0:\n        if action == \"承诺\":\n            return 1, \"管理员把你的承诺抄进登记簿：**先调查来历，绝不冒领**。下次回来输入「调查」，我会把柜台后的记录交给你。\"\
+          \n        return 0, \"今晚柜台上有一红一蓝两把伞。管理员压住登记簿说：先答应「承诺」，我才把调查记录交给你。\"\n    if stage == 1:\n        if action == \"\
+          调查\":\n            return 2, \"管理员翻出你的旧承诺，递给你一张纸条：**失主说，雨伞与晴天的天空同色。** 请选择「回答蓝伞」或「回答红伞」。\"\n        return 1, \"\
+          管理员认出了你的存档，记得你答应先调查来历。输入「调查」，就能翻开登记簿。\"\n    if stage == 2:\n        if action == \"回答蓝伞\":\n            return\
+          \ 3, \"蓝伞的把手刻着失主的名字。归还成功，你获得了「雨夜守约人」徽章。\"\n        if action == \"回答红伞\":\n            return 2, \"红伞的把手没有失主的名字。管理员请你再想想：晴天的天空是什么颜色？\"\
+          \n        return 2, \"线索仍在：失主说雨伞与晴天的天空同色。请选择「回答蓝伞」或「回答红伞」。\"\n    return 3, \"登记簿记着你已经归还蓝伞，并获得「雨夜守约人」徽章。换一个新存档码可以重新调查。\"\
+          \n\n\ndef plan_turn(body, save_code, action):\n    request = {\"op\": \"check\", \"code\": save_code}\n    if not\
+          \ save_code:\n        return {\"body\": json.dumps(request), \"reply\": USAGE}\n    state = json.loads(body)\n \
+          \   if not state.get(\"ok\"):\n        return {\"body\": json.dumps(request), \"reply\": \"登记簿暂不可用，请稍后重试。\"}\n \
+          \   stage = state[\"stage\"]\n    next_stage, reply = choose(stage, action)\n    if next_stage != stage:\n     \
+          \   request.update(op=\"advance\", expected=stage, stage=next_stage)\n    return {\"body\": json.dumps(request),\
+          \ \"reply\": f\"{reply}\\n\\n{MENU}\"}\n\n\ndef finish_turn(body, reply):\n    if not json.loads(body).get(\"ok\"\
+          ):\n        return {\"reply\": \"登记簿没有保存本轮进度。请重试，或先用「查看」确认当前存档。\"}\n    return {\"reply\": reply}\n\n\ndef main(body,\
+          \ reply):\n    return finish_turn(body, reply)\n"
+        variables:
+        - variable: body
+          value_selector:
+          - '140'
+          - body
+        - variable: reply
+          value_selector:
+          - '130'
+          - reply
+        outputs:
+          reply:
+            type: string
+            children: null
+      position: &id006
+        x: 1620
+        y: 200
+      positionAbsolute: *id006
+      height: 58
+      width: 244
+      sourcePosition: right
+      targetPosition: left
+      selected: false
+    - id: '160'
+      type: custom
+      data:
+        desc: ''
+        selected: false
+        type: answer
+        title: 管理员回复
+        answer: '{{#150.reply#}}'
+        variables: []
+      position: &id007
+        x: 1930
+        y: 200
+      positionAbsolute: *id007
+      height: 58
+      width: 244
+      sourcePosition: right
+      targetPosition: left
+      selected: false
+    edges:
+    - id: 100-source-110-target
+      type: custom
+      source: '100'
+      target: '110'
+      sourceHandle: source
+      targetHandle: target
+      data:
+        isInIteration: false
+        sourceType: start
+        targetType: code
+    - id: 110-source-120-target
+      type: custom
+      source: '110'
+      target: '120'
+      sourceHandle: source
+      targetHandle: target
+      data:
+        isInIteration: false
+        sourceType: code
+        targetType: http-request
+    - id: 120-source-130-target
+      type: custom
+      source: '120'
+      target: '130'
+      sourceHandle: source
+      targetHandle: target
+      data:
+        isInIteration: false
+        sourceType: http-request
+        targetType: code
+    - id: 130-source-140-target
+      type: custom
+      source: '130'
+      target: '140'
+      sourceHandle: source
+      targetHandle: target
+      data:
+        isInIteration: false
+        sourceType: code
+        targetType: http-request
+    - id: 140-source-150-target
+      type: custom
+      source: '140'
+      target: '150'
+      sourceHandle: source
+      targetHandle: target
+      data:
+        isInIteration: false
+        sourceType: http-request
+        targetType: code
+    - id: 150-source-160-target
+      type: custom
+      source: '150'
+      target: '160'
+      sourceHandle: source
+      targetHandle: target
+      data:
+        isInIteration: false
+        sourceType: code
+        targetType: answer
+    viewport:
+      x: 0
+      y: 0
+      zoom: 0.7

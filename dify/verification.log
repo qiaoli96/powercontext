@@ -1,0 +1,32 @@
+127.0.0.1 - - [08/Nov/2026 00:40:54] "POST /memory HTTP/1.1" 200 -
+127.0.0.1 - - [08/Nov/2026 00:40:54] "POST /memory HTTP/1.1" 200 -
+127.0.0.1 - - [08/Nov/2026 00:40:54] "POST /memory HTTP/1.1" 200 -
+127.0.0.1 - - [08/Nov/2026 00:40:54] "POST /memory HTTP/1.1" 200 -
+127.0.0.1 - - [08/Nov/2026 00:40:54] "POST /memory HTTP/1.1" 200 -
+127.0.0.1 - - [08/Nov/2026 00:40:55] "POST /memory HTTP/1.1" 200 -
+127.0.0.1 - - [08/Nov/2026 00:41:02] "POST /memory HTTP/1.1" 200 -
+127.0.0.1 - - [08/Nov/2026 00:41:02] "POST /memory HTTP/1.1" 200 -
+127.0.0.1 - - [08/Nov/2026 00:41:02] "POST /memory HTTP/1.1" 200 -
+127.0.0.1 - - [08/Nov/2026 00:41:02] "POST /memory HTTP/1.1" 200 -
+127.0.0.1 - - [08/Nov/2026 00:41:02] "POST /memory HTTP/1.1" 200 -
+127.0.0.1 - - [08/Nov/2026 00:41:02] "POST /memory HTTP/1.1" 200 -
+127.0.0.1 - - [08/Nov/2026 00:41:02] "POST /memory HTTP/1.1" 200 -
+127.0.0.1 - - [08/Nov/2026 00:41:02] "POST /memory HTTP/1.1" 200 -
+127.0.0.1 - - [08/Nov/2026 00:41:03] "POST /memory HTTP/1.1" 200 -
+127.0.0.1 - - [08/Nov/2026 00:41:03] "POST /memory HTTP/1.1" 200 -
+127.0.0.1 - - [08/Nov/2026 00:41:03] "POST /memory HTTP/1.1" 200 -
+127.0.0.1 - - [08/Nov/2026 00:41:03] "POST /memory HTTP/1.1" 200 -
+PASS: invalid input, gated clue, recorded promise
+PowerContext read save=2f7d3089 stage=0
+PowerContext read save=2f7d3089 stage=0
+PowerContext advance save=2f7d3089 stage=1
+PASS: process restart, remembered promise, clue, wrong/correct answers, save isolation
+PowerContext read save=2f7d3089 stage=1
+PowerContext read save=2f7d3089 stage=1
+PowerContext advance save=2f7d3089 stage=2
+PowerContext read save=2f7d3089 stage=2
+PowerContext read save=2f7d3089 stage=2
+PowerContext advance save=2f7d3089 stage=3
+PowerContext read save=2f7d3089 stage=3
+PowerContext read save=477b6f8a stage=0
+Verified exported Code nodes and PowerContext HTTP bridge. Dify import/runtime not exercised.
