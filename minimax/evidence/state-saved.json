@@ -1,0 +1,10 @@
+{
+  "stage": 1,
+  "next": "verify",
+  "source": "generated/tickets.py",
+  "completed": [
+    "Recorded baseline behavior",
+    "Generated MiniMax patch"
+  ],
+  "baseline_test_exit_code": 1
+}
